@@ -100,7 +100,7 @@ const PROJECTS = [
     tags: ["Next.js", "Stripe", "PostgreSQL", "Redis"],
     demo: "#",
     github: "#",
-    accent: "from-[oklch(0.72_0.19_260)] to-[oklch(0.65_0.24_300)]",
+    accent: "from-[oklch(0.8_0.13_85)] to-[oklch(0.9_0.08_95)]",
   },
   {
     title: "PulseAI Studio",
@@ -110,7 +110,7 @@ const PROJECTS = [
     tags: ["React", "OpenAI", "LangChain", "pgvector"],
     demo: "#",
     github: "#",
-    accent: "from-[oklch(0.65_0.24_300)] to-[oklch(0.75_0.2_220)]",
+    accent: "from-[oklch(0.88_0.09_95)] to-[oklch(0.72_0.12_75)]",
   },
   {
     title: "OrbitOps",
@@ -120,7 +120,7 @@ const PROJECTS = [
     tags: ["TypeScript", "AWS", "Grafana", "Kafka"],
     demo: "#",
     github: "#",
-    accent: "from-[oklch(0.75_0.2_220)] to-[oklch(0.72_0.19_260)]",
+    accent: "from-[oklch(0.72_0.12_75)] to-[oklch(0.85_0.12_88)]",
   },
   {
     title: "LedgerLite",
@@ -130,7 +130,7 @@ const PROJECTS = [
     tags: ["React Native", "NestJS", "PostgreSQL"],
     demo: "#",
     github: "#",
-    accent: "from-[oklch(0.7_0.2_180)] to-[oklch(0.72_0.19_260)]",
+    accent: "from-[oklch(0.84_0.11_90)] to-[oklch(0.76_0.13_80)]",
   },
 ];
 
@@ -912,11 +912,11 @@ function GitHubShowcase() {
     [],
   );
   const colors = [
-    "oklch(0.24 0.03 265 / 0.6)",
-    "oklch(0.4 0.1 265 / 0.7)",
-    "oklch(0.55 0.16 265 / 0.85)",
-    "oklch(0.68 0.2 275)",
-    "oklch(0.75 0.22 290)",
+    "oklch(0.27 0.05 258 / 0.6)",
+    "oklch(0.45 0.07 200 / 0.5)",
+    "oklch(0.6 0.1 88 / 0.7)",
+    "oklch(0.75 0.12 85)",
+    "oklch(0.88 0.1 92)",
   ];
 
   return (
