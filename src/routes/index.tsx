@@ -100,7 +100,7 @@ const PROJECTS = [
     tags: ["Next.js", "Stripe", "PostgreSQL", "Redis"],
     demo: "#",
     github: "#",
-    accent: "from-[oklch(0.8_0.13_85)] to-[oklch(0.9_0.08_95)]",
+    accent: "from-[oklch(0.6_0.2_255)] to-[oklch(0.45_0.2_262)]",
   },
   {
     title: "PulseAI Studio",
@@ -110,7 +110,7 @@ const PROJECTS = [
     tags: ["React", "OpenAI", "LangChain", "pgvector"],
     demo: "#",
     github: "#",
-    accent: "from-[oklch(0.88_0.09_95)] to-[oklch(0.72_0.12_75)]",
+    accent: "from-[oklch(0.55_0.19_258)] to-[oklch(0.68_0.15_235)]",
   },
   {
     title: "OrbitOps",
@@ -120,7 +120,7 @@ const PROJECTS = [
     tags: ["TypeScript", "AWS", "Grafana", "Kafka"],
     demo: "#",
     github: "#",
-    accent: "from-[oklch(0.72_0.12_75)] to-[oklch(0.85_0.12_88)]",
+    accent: "from-[oklch(0.45_0.2_262)] to-[oklch(0.62_0.18_248)]",
   },
   {
     title: "LedgerLite",
@@ -130,7 +130,7 @@ const PROJECTS = [
     tags: ["React Native", "NestJS", "PostgreSQL"],
     demo: "#",
     github: "#",
-    accent: "from-[oklch(0.84_0.11_90)] to-[oklch(0.76_0.13_80)]",
+    accent: "from-[oklch(0.66_0.16_240)] to-[oklch(0.5_0.2_260)]",
   },
 ];
 
@@ -238,7 +238,7 @@ const TESTIMONIALS = [
 /* ---------- Utilities ---------- */
 
 function useTheme() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
   useEffect(() => {
     const root = document.documentElement;
     root.classList.toggle("light", theme === "light");
@@ -912,11 +912,11 @@ function GitHubShowcase() {
     [],
   );
   const colors = [
-    "oklch(0.27 0.05 258 / 0.6)",
-    "oklch(0.45 0.07 200 / 0.5)",
-    "oklch(0.6 0.1 88 / 0.7)",
-    "oklch(0.75 0.12 85)",
-    "oklch(0.88 0.1 92)",
+    "oklch(0.55 0.19 258 / 0.12)",
+    "oklch(0.7 0.13 250 / 0.45)",
+    "oklch(0.62 0.17 255 / 0.7)",
+    "oklch(0.55 0.19 258)",
+    "oklch(0.42 0.2 262)",
   ];
 
   return (
