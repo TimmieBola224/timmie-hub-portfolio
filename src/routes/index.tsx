@@ -1074,9 +1074,16 @@ function Testimonials() {
 }
 
 
+const SOCIALS = [
+  { icon: Linkedin, label: "LinkedIn — Timilehin Hezekiah Bolarinwa", href: CONTACT.linkedin },
+  { icon: Instagram, label: "Instagram — Timilehin Hezekiah Bolarinwa", href: CONTACT.instagram },
+  { icon: Twitter, label: "Twitter/X — Timilehin Hezekiah Bolarinwa", href: CONTACT.twitter },
+  { icon: MessageCircle, label: `WhatsApp — ${CONTACT.phone}`, href: CONTACT.whatsapp },
+];
+
 function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   function validate() {
@@ -1084,6 +1091,8 @@ function Contact() {
     if (!form.name.trim() || form.name.length > 100) e.name = "Enter your name (max 100 chars).";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) || form.email.length > 255)
       e.email = "Enter a valid email.";
+    if (!form.subject.trim() || form.subject.length > 150)
+      e.subject = "Enter a subject (max 150 chars).";
     if (!form.message.trim() || form.message.length > 1000)
       e.message = "Message required (max 1000 chars).";
     setErrors(e);
@@ -1094,52 +1103,75 @@ function Contact() {
     ev.preventDefault();
     if (!validate()) return;
     setStatus("sending");
-    // Simulated send — wire up to a server function or email service later.
-    await new Promise((r) => setTimeout(r, 900));
+    const body = `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`;
+    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
+      form.subject,
+    )}&body=${encodeURIComponent(body)}`;
+    await new Promise((r) => setTimeout(r, 600));
     setStatus("sent");
-    setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setStatus("idle"), 4000);
+    setForm({ name: "", email: "", subject: "", message: "" });
+    setTimeout(() => setStatus("idle"), 5000);
   }
+
+  const inputClass =
+    "w-full rounded-xl border border-glass-border bg-background/40 px-4 py-3 text-sm outline-none transition-colors focus:border-electric";
+  const labelClass =
+    "mb-1.5 block text-xs font-mono uppercase tracking-widest text-muted-foreground";
 
   return (
     <Section id="contact">
       <SectionTitle
-        eyebrow="09 // Contact"
-        title="Let's Build Something"
-        sub="Have a project in mind? I'd love to hear about it."
+        eyebrow="08 // Contact"
+        title="Get In Touch"
+        sub="I am available for freelance web design projects, financial consulting, public speaking engagements, and business consulting. Feel free to reach out through any of the channels below."
       />
       <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
         <div className="space-y-4">
           <a
-            href="mailto:hello@timmiehub.dev"
+            href={`mailto:${CONTACT.email}`}
             className="glass flex items-center gap-4 rounded-2xl p-5 transition-transform hover:-translate-y-0.5"
           >
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
               <Mail className="h-5 w-5" />
             </div>
+            <div className="min-w-0">
+              <div className="font-mono text-xs text-muted-foreground">Email</div>
+              <div className="truncate font-display text-sm font-semibold">{CONTACT.email}</div>
+            </div>
+          </a>
+          <a
+            href={CONTACT.phoneHref}
+            className="glass flex items-center gap-4 rounded-2xl p-5 transition-transform hover:-translate-y-0.5"
+          >
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
+              <Phone className="h-5 w-5" />
+            </div>
             <div>
-              <div className="text-xs text-muted-foreground font-mono">Email</div>
-              <div className="font-display font-semibold">hello@timmiehub.dev</div>
+              <div className="font-mono text-xs text-muted-foreground">Phone</div>
+              <div className="font-display font-semibold">{CONTACT.phone}</div>
             </div>
           </a>
           <div className="glass flex items-center gap-4 rounded-2xl p-5">
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
               <MapPin className="h-5 w-5" />
             </div>
             <div>
-              <div className="text-xs text-muted-foreground font-mono">Based in</div>
-              <div className="font-display font-semibold">Lagos, Nigeria · Remote</div>
+              <div className="font-mono text-xs text-muted-foreground">Location</div>
+              <div className="font-display font-semibold">{CONTACT.location}</div>
             </div>
           </div>
           <div className="flex gap-3">
-            {[Github, Linkedin, Twitter].map((Icon, i) => (
+            {SOCIALS.map((s) => (
               <a
-                key={i}
-                href="#"
-                aria-label="Social link"
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={s.label}
+                title={s.label}
                 className="glass grid h-11 w-11 place-items-center rounded-xl transition-transform hover:-translate-y-0.5"
               >
-                <Icon className="h-5 w-5" />
+                <s.icon className="h-5 w-5" />
               </a>
             ))}
           </div>
@@ -1148,9 +1180,7 @@ function Contact() {
         <form onSubmit={onSubmit} className="glass rounded-2xl p-6 sm:p-8" noValidate>
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block">
-              <span className="mb-1.5 block text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                Name
-              </span>
+              <span className={labelClass}>Name</span>
               <input
                 type="text"
                 value={form.name}
@@ -1158,14 +1188,12 @@ function Contact() {
                 maxLength={100}
                 required
                 aria-invalid={!!errors.name}
-                className="w-full rounded-xl border border-glass-border bg-background/40 px-4 py-3 text-sm outline-none transition-colors focus:border-electric"
+                className={inputClass}
               />
               {errors.name && <p className="mt-1 text-xs text-destructive">{errors.name}</p>}
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                Email
-              </span>
+              <span className={labelClass}>Email</span>
               <input
                 type="email"
                 value={form.email}
@@ -1173,15 +1201,26 @@ function Contact() {
                 maxLength={255}
                 required
                 aria-invalid={!!errors.email}
-                className="w-full rounded-xl border border-glass-border bg-background/40 px-4 py-3 text-sm outline-none transition-colors focus:border-electric"
+                className={inputClass}
               />
               {errors.email && <p className="mt-1 text-xs text-destructive">{errors.email}</p>}
             </label>
           </div>
           <label className="mt-4 block">
-            <span className="mb-1.5 block text-xs font-mono uppercase tracking-widest text-muted-foreground">
-              Message
-            </span>
+            <span className={labelClass}>Subject</span>
+            <input
+              type="text"
+              value={form.subject}
+              onChange={(e) => setForm({ ...form, subject: e.target.value })}
+              maxLength={150}
+              required
+              aria-invalid={!!errors.subject}
+              className={inputClass}
+            />
+            {errors.subject && <p className="mt-1 text-xs text-destructive">{errors.subject}</p>}
+          </label>
+          <label className="mt-4 block">
+            <span className={labelClass}>Message</span>
             <textarea
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -1189,14 +1228,14 @@ function Contact() {
               required
               rows={5}
               aria-invalid={!!errors.message}
-              className="w-full resize-none rounded-xl border border-glass-border bg-background/40 px-4 py-3 text-sm outline-none transition-colors focus:border-electric"
+              className={`${inputClass} resize-none`}
             />
             {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message}</p>}
           </label>
 
           <div className="mt-6 flex items-center justify-between gap-4">
-            <span className="text-xs text-muted-foreground">
-              {status === "sent" && "✓ Message sent — I'll get back within 24h."}
+            <span className="text-xs text-muted-foreground" role="status">
+              {status === "sent" && "✓ Thanks — your mail app should now be open."}
               {status === "error" && "Something went wrong. Try again."}
             </span>
             <button
@@ -1219,24 +1258,31 @@ function Footer() {
     <footer className="border-t border-glass-border py-10">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 sm:flex-row">
         <div className="flex items-center gap-2">
-          <span className="grid h-7 w-7 place-items-center rounded-md bg-gradient-brand text-primary-foreground text-sm font-bold">
+          <span className="grid h-7 w-7 place-items-center rounded-md bg-gradient-brand text-sm font-bold text-primary-foreground">
             T
           </span>
           <span className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Timmie Hub. Crafted with intent.
+            © {new Date().getFullYear()} Timmie Hub. Built with intent.
           </span>
         </div>
         <div className="flex items-center gap-4 text-muted-foreground">
-          <a href="#" aria-label="GitHub" className="hover:text-foreground">
-            <Github className="h-4 w-4" />
-          </a>
-          <a href="#" aria-label="LinkedIn" className="hover:text-foreground">
-            <Linkedin className="h-4 w-4" />
-          </a>
-          <a href="#" aria-label="Twitter" className="hover:text-foreground">
-            <Twitter className="h-4 w-4" />
-          </a>
-          <a href="mailto:hello@timmiehub.dev" aria-label="Email" className="hover:text-foreground">
+          {SOCIALS.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={s.label}
+              className="hover:text-foreground"
+            >
+              <s.icon className="h-4 w-4" />
+            </a>
+          ))}
+          <a
+            href={`mailto:${CONTACT.email}`}
+            aria-label="Email"
+            className="hover:text-foreground"
+          >
             <Mail className="h-4 w-4" />
           </a>
         </div>
