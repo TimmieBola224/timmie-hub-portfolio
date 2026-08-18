@@ -533,23 +533,33 @@ function Nav({ active }: { active: string }) {
               exit={{ opacity: 0, y: -8 }}
               className="glass mt-2 rounded-2xl p-3 lg:hidden"
             >
-              <ul className="grid gap-1">
-                {NAV.map((n) => (
-                  <li key={n.id}>
-                    <a
-                      href={`#${n.id}`}
-                      onClick={() => setOpen(false)}
-                      className={`block rounded-lg px-3 py-2 text-sm ${
-                        active === n.id
-                          ? "bg-gradient-brand text-primary-foreground"
-                          : "hover:bg-secondary"
-                      }`}
-                    >
-                      {n.label}
-                    </a>
-                  </li>
+              <div className="grid gap-3">
+                {NAV_GROUPS.map((g) => (
+                  <div key={g.group}>
+                    <div className="px-3 pb-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                      {g.group}
+                    </div>
+                    <ul className="grid gap-1">
+                      {g.items.map((n) => (
+                        <li key={n.id}>
+                          <a
+                            href={`#${n.id}`}
+                            onClick={() => setOpen(false)}
+                            className={`block rounded-lg px-3 py-2 text-sm ${
+                              active === n.id
+                                ? "bg-gradient-brand text-primary-foreground"
+                                : "hover:bg-secondary"
+                            }`}
+                          >
+                            {n.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
+
             </motion.div>
           )}
         </AnimatePresence>
