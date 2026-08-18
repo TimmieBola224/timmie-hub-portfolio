@@ -1347,7 +1347,6 @@ function Portfolio() {
         <Experience />
         <Education />
         <Testimonials />
-        <GitHubShowcase />
         <Contact />
       </main>
       <Footer />
