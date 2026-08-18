@@ -3,42 +3,51 @@ import { motion, useScroll, useSpring, AnimatePresence } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUp,
-  Download,
-  Github,
+  Award,
+  Briefcase,
+  Building2,
+  Calculator,
+  ExternalLink,
+  GraduationCap,
+  Globe,
+  Instagram,
   Linkedin,
   Mail,
   MapPin,
   Menu,
+  MessageCircle,
+  Mic,
   Moon,
-  Send,
-  Sun,
-  Twitter,
-  X,
-  ExternalLink,
-  Code2,
-  Server,
-  Database,
-  Cloud,
-  Cog,
-  Sparkles,
-  Briefcase,
-  GraduationCap,
-  Award,
+  Palette,
+  Phone,
+  Presentation,
   Quote,
   Rocket,
-  Layers,
-  Wrench,
+  Send,
+  Sparkles,
+  Sun,
+  Twitter,
+  Wallet,
+  X,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Timmie Hub — Bolarinwa Timilehin Hezekiah | Full-Stack Developer" },
+      { title: "Timmie Hub — Bolarinwa Timilehin Hezekiah | Web Design & Finance" },
       {
         name: "description",
         content:
-          "Full-Stack Developer building scalable digital experiences with React, Node.js, cloud, and AI. Explore projects, services, and contact Timmie Hub.",
+          "Bolarinwa Timilehin Hezekiah — web designer, accounting professional, entrepreneur, and public speaker. AI-powered websites, financial consulting, training, and business setup.",
       },
+      { property: "og:title", content: "Timmie Hub — Bolarinwa Timilehin Hezekiah" },
+      {
+        property: "og:description",
+        content:
+          "Combining financial knowledge, business experience, and creative design to deliver real value.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Portfolio,
@@ -46,143 +55,204 @@ export const Route = createFileRoute("/")({
 
 /* ---------- Data ---------- */
 
-const NAV = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "services", label: "Services" },
-  { id: "experience", label: "Experience" },
-  { id: "education", label: "Education" },
-  { id: "testimonials", label: "Testimonials" },
-  { id: "contact", label: "Contact" },
+const CONTACT = {
+  email: "bolarinwatimilehinhezekiah@gmail.com",
+  phone: "+234 810 731 3932",
+  phoneHref: "tel:+2348107313932",
+  whatsapp: "https://wa.me/2348107313932",
+  location: "Taraba State, Nigeria",
+  linkedin: "https://www.linkedin.com/",
+  instagram: "https://www.instagram.com/",
+  twitter: "https://x.com/",
+};
+
+const NAV_GROUPS = [
+  { group: "Main", items: [{ id: "home", label: "Home" }, { id: "about", label: "About" }] },
+  {
+    group: "Expertise",
+    items: [{ id: "skills", label: "Skills" }, { id: "services", label: "Services" }],
+  },
+  {
+    group: "Work",
+    items: [
+      { id: "projects", label: "Projects" },
+      { id: "experience", label: "Experience" },
+      { id: "education", label: "Education" },
+    ],
+  },
+  { group: "Social Proof", items: [{ id: "testimonials", label: "Testimonials" }] },
+  { group: "Contact", items: [{ id: "contact", label: "Contact" }] },
 ];
+
+const NAV = NAV_GROUPS.flatMap((g) => g.items);
 
 const SKILLS = [
   {
-    icon: Code2,
-    title: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    icon: Palette,
+    title: "Web Design",
+    items: [
+      "AI-Powered Web Design (Lovable)",
+      "Version Control & Code Management (GitHub)",
+      "HTML Fundamentals",
+      "UI Design & Prototyping (Google Stitch)",
+    ],
   },
   {
-    icon: Server,
-    title: "Backend",
-    items: ["Node.js", "Express", "NestJS", "GraphQL", "REST APIs"],
+    icon: Calculator,
+    title: "Accounting & Finance",
+    items: [
+      "Financial Reporting",
+      "Microsoft Excel",
+      "Public Sector Accounting Knowledge",
+      "Financial Literacy & Money Management",
+    ],
   },
   {
-    icon: Database,
-    title: "Databases",
-    items: ["PostgreSQL", "MongoDB", "Redis", "Supabase", "Prisma"],
+    icon: Mic,
+    title: "Public Speaking",
+    items: ["Presentations", "Training & Teaching", "Financial Education & Coaching"],
   },
   {
-    icon: Cloud,
-    title: "Cloud",
-    items: ["AWS", "Vercel", "Cloudflare", "Firebase", "Docker"],
-  },
-  {
-    icon: Cog,
-    title: "DevOps",
-    items: ["CI/CD", "GitHub Actions", "Kubernetes", "Nginx", "Linux"],
-  },
-  {
-    icon: Sparkles,
-    title: "AI Tools",
-    items: ["OpenAI", "LangChain", "Vector DBs", "RAG", "Prompt Engineering"],
+    icon: Building2,
+    title: "Entrepreneurship",
+    items: [
+      "Business Operations & Management",
+      "Customer Service",
+      "Computer & Tech Services",
+      "Food Business Management",
+      "Telecom Services",
+    ],
   },
 ];
 
+const PROJECT_CATEGORIES = ["All", "Web Design", "Business", "Public Speaking"] as const;
+
 const PROJECTS = [
   {
-    title: "NovaCommerce",
-    tagline: "Scalable headless commerce platform",
+    title: "Timmie Hub Portfolio",
+    category: "Web Design",
+    tagline: "Personal brand portfolio",
     description:
-      "Multi-tenant e-commerce backbone serving 50k+ MAU. Real-time inventory, Stripe payments, and edge-cached storefronts.",
-    tags: ["Next.js", "Stripe", "PostgreSQL", "Redis"],
-    demo: "#",
-    github: "#",
+      "A personal portfolio website designed and built using AI-powered web design tools. Showcases my skills, services, and experience across web design, accounting, and entrepreneurship.",
+    tags: ["Lovable", "Web Design", "Personal Brand"],
+    demo: "#home",
     accent: "from-[oklch(0.6_0.2_255)] to-[oklch(0.45_0.2_262)]",
   },
   {
-    title: "PulseAI Studio",
-    tagline: "AI-powered content workspace",
+    title: "Josmay Digital Growth",
+    category: "Web Design",
+    tagline: "Client website — digital skills platform",
     description:
-      "Collaborative editor with RAG-backed assistants, semantic search, and streamed completions over 100k documents.",
-    tags: ["React", "OpenAI", "LangChain", "pgvector"],
-    demo: "#",
-    github: "#",
+      "A client project — designed and built a modern website for Josmay Digital Growth, a platform where people learn valuable digital skills. Delivered a clean, professional, and user-friendly website to help the client establish their online presence.",
+    tags: ["Client Work", "Landing Page", "Branding"],
+    demo: "#contact",
     accent: "from-[oklch(0.55_0.19_258)] to-[oklch(0.68_0.15_235)]",
   },
   {
-    title: "OrbitOps",
-    tagline: "DevOps observability dashboard",
+    title: "Food Business — Doughnut Sales",
+    category: "Business",
+    tagline: "2+ years of daily operations",
     description:
-      "Unified metrics, logs, and deploy timelines across AWS + Vercel. Alerting with anomaly detection.",
-    tags: ["TypeScript", "AWS", "Grafana", "Kafka"],
-    demo: "#",
-    github: "#",
+      "Running a successful doughnut business for over 2 years, managing daily operations, customer service, and sales.",
+    tags: ["Operations", "Sales", "Customer Service"],
     accent: "from-[oklch(0.45_0.2_262)] to-[oklch(0.62_0.18_248)]",
   },
   {
-    title: "LedgerLite",
-    tagline: "Fintech ledger for African SMBs",
+    title: "Telecom & Data Services",
+    category: "Business",
+    tagline: "Affordable connectivity for the community",
     description:
-      "Double-entry accounting with mobile-money integrations, offline-first sync, and audit-ready exports.",
-    tags: ["React Native", "NestJS", "PostgreSQL"],
-    demo: "#",
-    github: "#",
+      "Providing affordable telecom and data services to customers for over 2 years, building a loyal customer base.",
+    tags: ["Retail", "Customer Loyalty"],
     accent: "from-[oklch(0.66_0.16_240)] to-[oklch(0.5_0.2_260)]",
+  },
+  {
+    title: "Computer Center",
+    category: "Business",
+    tagline: "Local tech services hub",
+    description:
+      "Established and currently managing a computer center providing tech services to the local community.",
+    tags: ["Tech Services", "Management"],
+    accent: "from-[oklch(0.58_0.18_250)] to-[oklch(0.42_0.2_264)]",
+  },
+  {
+    title: "Online Finance Talk",
+    category: "Public Speaking",
+    tagline: "Financial education session",
+    description:
+      "Hosted an online financial education session with colleagues, teaching practical money management and financial literacy.",
+    tags: ["Speaking", "Financial Literacy"],
+    accent: "from-[oklch(0.62_0.19_246)] to-[oklch(0.46_0.2_262)]",
+  },
+  {
+    title: "One-on-One Financial Coaching",
+    category: "Public Speaking",
+    tagline: "Personal money coaching",
+    description:
+      "Provided personal financial guidance and coaching to individuals, helping them make better money decisions.",
+    tags: ["Coaching", "Advisory"],
+    accent: "from-[oklch(0.7_0.13_244)] to-[oklch(0.5_0.19_258)]",
   },
 ];
 
 const SERVICES = [
   {
-    icon: Layers,
-    title: "Full-Stack Web Apps",
-    desc: "End-to-end product engineering — from schema design to pixel-perfect UI and deployment.",
+    icon: Globe,
+    title: "Website Design",
+    desc: "I design and build modern, professional websites for businesses and individuals using AI-powered tools. Whether you need a portfolio, business website, or landing page — I will bring your vision to life.",
   },
   {
-    icon: Rocket,
-    title: "MVP to Scale",
-    desc: "Ship your MVP in weeks, then architect for scale without rewrites.",
+    icon: Wallet,
+    title: "Financial Consulting",
+    desc: "I help individuals and small businesses understand their finances, manage their money wisely, and make better financial decisions. My accounting background ensures you get reliable and practical financial guidance.",
   },
   {
-    icon: Sparkles,
-    title: "AI Integrations",
-    desc: "Add intelligent features — chat, search, automation — powered by LLMs and vector stores.",
+    icon: Presentation,
+    title: "Public Speaking & Training",
+    desc: "I deliver engaging and impactful presentations and training sessions covering finance, personal development, and digital skills. Whether for a corporate event, school, or community gathering — I will inspire and educate your audience.",
   },
   {
-    icon: Wrench,
-    title: "Technical Consulting",
-    desc: "Architecture reviews, performance audits, and DevOps modernization.",
+    icon: Briefcase,
+    title: "Business Setup Consulting",
+    desc: "I help aspiring entrepreneurs plan, set up, and manage their businesses effectively. Drawing from my hands-on experience running multiple businesses, I provide practical guidance to help you start and grow successfully.",
   },
 ];
 
 const EXPERIENCE = [
   {
-    role: "Senior Full-Stack Engineer",
-    org: "Freelance / Contract",
-    period: "2023 — Present",
+    role: "Financial Secretary",
+    org: "NUASA — Federal University Wukari Chapter",
+    period: "2025 — Present",
     points: [
-      "Delivered production platforms for fintech, SaaS, and AI startups.",
-      "Led architecture for multi-region deployments and real-time systems.",
+      "Managing and recording all financial transactions of the association.",
+      "Maintaining accurate financial records and ensuring accountability.",
     ],
   },
   {
-    role: "Full-Stack Developer",
-    org: "Independent Studio",
-    period: "2021 — 2023",
+    role: "Assistant Financial Secretary",
+    org: "NUASA — Federal University Wukari Chapter",
+    period: "2024",
     points: [
-      "Built 15+ web apps with React, Node.js, and cloud-native stacks.",
-      "Introduced CI/CD pipelines cutting release time by 70%.",
+      "Supported financial management and record keeping of the association.",
+      "Gained hands-on experience in organizational accounting.",
     ],
   },
   {
-    role: "Software Developer",
-    org: "Early Career",
-    period: "2019 — 2021",
+    role: "Entrepreneur & Business Owner",
+    org: "Computer Center | Doughnut Business | Telecom & Data Services",
+    period: "2024 — Present",
     points: [
-      "Contributed to open-source and built internal tools.",
-      "Focused on clean architecture and developer experience.",
+      "Started and managed multiple businesses from 200 level.",
+      "Developed strong skills in operations, customer service, sales, and financial management.",
+    ],
+  },
+  {
+    role: "Public Speaker & Financial Coach",
+    org: "Independent",
+    period: "2022 — Present",
+    points: [
+      "Conducted online financial education sessions.",
+      "Delivered one-on-one financial coaching to help people manage money better.",
     ],
   },
 ];
@@ -190,48 +260,57 @@ const EXPERIENCE = [
 const EDUCATION = [
   {
     icon: GraduationCap,
-    title: "B.Sc. Computer Science",
-    org: "University",
-    year: "2019 — 2023",
+    title: "B.Sc Accounting",
+    org: "Federal University Wukari, Taraba State",
+    year: "2023 — Present (400 Level)",
+    desc: "Studying Accounting with a focus on financial reporting, public sector accounting, and financial management. Active member and Financial Secretary of NUASA Federal University Wukari Chapter.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Secondary School Certificate",
+    org: "Ondo Boys High School",
+    year: "Graduated 2023",
+    desc: "Completed secondary school education at one of Nigeria's reputable institutions.",
   },
   {
     icon: Award,
-    title: "AWS Certified Developer — Associate",
-    org: "Amazon Web Services",
-    year: "2024",
-  },
-  {
-    icon: Award,
-    title: "Meta Full-Stack Developer",
-    org: "Meta / Coursera",
-    year: "2023",
-  },
-  {
-    icon: Award,
-    title: "MongoDB Associate Developer",
-    org: "MongoDB University",
-    year: "2023",
+    title: "Public Speaking Certification",
+    org: "Global Speaker Academy — Issued by Emmanuel Edoh",
+    year: "2025",
+    desc: "Completed a professional public speaking program, developing skills in presentation, communication, audience engagement, and impactful delivery.",
   },
 ];
 
 const TESTIMONIALS = [
   {
     quote:
-      "Timmie shipped what our previous team couldn't in six months. Clean code, sharp architecture, and a real partner in the process.",
-    name: "Adaeze O.",
-    title: "CTO, Fintech Startup",
+      "Your advice really changed the way I managed my business. You taught me how to budget properly, separate business money from personal money, and reinvest my profits. Today, my business is growing steadily. I'm truly grateful!",
+    name: "Okoro Ogechi",
+    title: "Business Owner",
   },
   {
     quote:
-      "Exceptional engineer. He turned a rough concept into a polished product our users genuinely love.",
-    name: "Marcus L.",
-    title: "Founder, SaaS Platform",
+      "I remember when I was struggling to make good financial decisions in my business. Your advice on saving, controlling expenses, and managing cash flow helped me a lot. Today, I'm seeing real progress and better profits. Thank you so much!",
+    name: "Nkonyu Fortunate",
+    title: "Business Owner",
   },
   {
     quote:
-      "One of the most thoughtful developers I've worked with. Reliable, fast, and design-aware.",
-    name: "Priya S.",
-    title: "Product Lead",
+      "Your financial guidance gave me a better understanding of how to manage my business. I started keeping proper records and stopped spending my business capital unnecessarily. My business has improved tremendously, and I'm doing much better now.",
+    name: "Prayer Akintunde",
+    title: "Business Owner",
+  },
+  {
+    quote:
+      "I'm grateful for the financial advice you gave me when I was just starting out. Your advice on pricing, profit management, and reinvestment helped me build a stronger business. Today, my business is doing well, and I can confidently say your advice made a difference.",
+    name: "Blessing Okeke",
+    title: "Business Owner",
+  },
+  {
+    quote:
+      "Getting my business website built by you was one of the best decisions I made for my business. You didn't just help me create a beautiful website — you helped me understand how to present my brand professionally online and attract more customers. Since launching the website, my business has gained more visibility and credibility. I'm really grateful for your excellent work!",
+    name: "Josmay Digital Growth",
+    title: "Client | Web Design",
   },
 ];
 
