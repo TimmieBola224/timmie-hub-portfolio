@@ -3,42 +3,51 @@ import { motion, useScroll, useSpring, AnimatePresence } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUp,
-  Download,
-  Github,
+  Award,
+  Briefcase,
+  Building2,
+  Calculator,
+  ExternalLink,
+  GraduationCap,
+  Globe,
+  Instagram,
   Linkedin,
   Mail,
   MapPin,
   Menu,
+  MessageCircle,
+  Mic,
   Moon,
-  Send,
-  Sun,
-  Twitter,
-  X,
-  ExternalLink,
-  Code2,
-  Server,
-  Database,
-  Cloud,
-  Cog,
-  Sparkles,
-  Briefcase,
-  GraduationCap,
-  Award,
+  Palette,
+  Phone,
+  Presentation,
   Quote,
   Rocket,
-  Layers,
-  Wrench,
+  Send,
+  Sparkles,
+  Sun,
+  Twitter,
+  Wallet,
+  X,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Timmie Hub — Bolarinwa Timilehin Hezekiah | Full-Stack Developer" },
+      { title: "Timmie Hub — Bolarinwa Timilehin Hezekiah | Web Design & Finance" },
       {
         name: "description",
         content:
-          "Full-Stack Developer building scalable digital experiences with React, Node.js, cloud, and AI. Explore projects, services, and contact Timmie Hub.",
+          "Bolarinwa Timilehin Hezekiah — web designer, accounting professional, entrepreneur, and public speaker. AI-powered websites, financial consulting, training, and business setup.",
       },
+      { property: "og:title", content: "Timmie Hub — Bolarinwa Timilehin Hezekiah" },
+      {
+        property: "og:description",
+        content:
+          "Combining financial knowledge, business experience, and creative design to deliver real value.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Portfolio,
@@ -46,143 +55,204 @@ export const Route = createFileRoute("/")({
 
 /* ---------- Data ---------- */
 
-const NAV = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "services", label: "Services" },
-  { id: "experience", label: "Experience" },
-  { id: "education", label: "Education" },
-  { id: "testimonials", label: "Testimonials" },
-  { id: "contact", label: "Contact" },
+const CONTACT = {
+  email: "bolarinwatimilehinhezekiah@gmail.com",
+  phone: "+234 810 731 3932",
+  phoneHref: "tel:+2348107313932",
+  whatsapp: "https://wa.me/2348107313932",
+  location: "Taraba State, Nigeria",
+  linkedin: "https://www.linkedin.com/",
+  instagram: "https://www.instagram.com/",
+  twitter: "https://x.com/",
+};
+
+const NAV_GROUPS = [
+  { group: "Main", items: [{ id: "home", label: "Home" }, { id: "about", label: "About" }] },
+  {
+    group: "Expertise",
+    items: [{ id: "skills", label: "Skills" }, { id: "services", label: "Services" }],
+  },
+  {
+    group: "Work",
+    items: [
+      { id: "projects", label: "Projects" },
+      { id: "experience", label: "Experience" },
+      { id: "education", label: "Education" },
+    ],
+  },
+  { group: "Social Proof", items: [{ id: "testimonials", label: "Testimonials" }] },
+  { group: "Contact", items: [{ id: "contact", label: "Contact" }] },
 ];
+
+const NAV = NAV_GROUPS.flatMap((g) => g.items);
 
 const SKILLS = [
   {
-    icon: Code2,
-    title: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    icon: Palette,
+    title: "Web Design",
+    items: [
+      "AI-Powered Web Design (Lovable)",
+      "Version Control & Code Management (GitHub)",
+      "HTML Fundamentals",
+      "UI Design & Prototyping (Google Stitch)",
+    ],
   },
   {
-    icon: Server,
-    title: "Backend",
-    items: ["Node.js", "Express", "NestJS", "GraphQL", "REST APIs"],
+    icon: Calculator,
+    title: "Accounting & Finance",
+    items: [
+      "Financial Reporting",
+      "Microsoft Excel",
+      "Public Sector Accounting Knowledge",
+      "Financial Literacy & Money Management",
+    ],
   },
   {
-    icon: Database,
-    title: "Databases",
-    items: ["PostgreSQL", "MongoDB", "Redis", "Supabase", "Prisma"],
+    icon: Mic,
+    title: "Public Speaking",
+    items: ["Presentations", "Training & Teaching", "Financial Education & Coaching"],
   },
   {
-    icon: Cloud,
-    title: "Cloud",
-    items: ["AWS", "Vercel", "Cloudflare", "Firebase", "Docker"],
-  },
-  {
-    icon: Cog,
-    title: "DevOps",
-    items: ["CI/CD", "GitHub Actions", "Kubernetes", "Nginx", "Linux"],
-  },
-  {
-    icon: Sparkles,
-    title: "AI Tools",
-    items: ["OpenAI", "LangChain", "Vector DBs", "RAG", "Prompt Engineering"],
+    icon: Building2,
+    title: "Entrepreneurship",
+    items: [
+      "Business Operations & Management",
+      "Customer Service",
+      "Computer & Tech Services",
+      "Food Business Management",
+      "Telecom Services",
+    ],
   },
 ];
 
+const PROJECT_CATEGORIES = ["All", "Web Design", "Business", "Public Speaking"] as const;
+
 const PROJECTS = [
   {
-    title: "NovaCommerce",
-    tagline: "Scalable headless commerce platform",
+    title: "Timmie Hub Portfolio",
+    category: "Web Design",
+    tagline: "Personal brand portfolio",
     description:
-      "Multi-tenant e-commerce backbone serving 50k+ MAU. Real-time inventory, Stripe payments, and edge-cached storefronts.",
-    tags: ["Next.js", "Stripe", "PostgreSQL", "Redis"],
-    demo: "#",
-    github: "#",
+      "A personal portfolio website designed and built using AI-powered web design tools. Showcases my skills, services, and experience across web design, accounting, and entrepreneurship.",
+    tags: ["Lovable", "Web Design", "Personal Brand"],
+    demo: "#home",
     accent: "from-[oklch(0.6_0.2_255)] to-[oklch(0.45_0.2_262)]",
   },
   {
-    title: "PulseAI Studio",
-    tagline: "AI-powered content workspace",
+    title: "Josmay Digital Growth",
+    category: "Web Design",
+    tagline: "Client website — digital skills platform",
     description:
-      "Collaborative editor with RAG-backed assistants, semantic search, and streamed completions over 100k documents.",
-    tags: ["React", "OpenAI", "LangChain", "pgvector"],
-    demo: "#",
-    github: "#",
+      "A client project — designed and built a modern website for Josmay Digital Growth, a platform where people learn valuable digital skills. Delivered a clean, professional, and user-friendly website to help the client establish their online presence.",
+    tags: ["Client Work", "Landing Page", "Branding"],
+    demo: "#contact",
     accent: "from-[oklch(0.55_0.19_258)] to-[oklch(0.68_0.15_235)]",
   },
   {
-    title: "OrbitOps",
-    tagline: "DevOps observability dashboard",
+    title: "Food Business — Doughnut Sales",
+    category: "Business",
+    tagline: "2+ years of daily operations",
     description:
-      "Unified metrics, logs, and deploy timelines across AWS + Vercel. Alerting with anomaly detection.",
-    tags: ["TypeScript", "AWS", "Grafana", "Kafka"],
-    demo: "#",
-    github: "#",
+      "Running a successful doughnut business for over 2 years, managing daily operations, customer service, and sales.",
+    tags: ["Operations", "Sales", "Customer Service"],
     accent: "from-[oklch(0.45_0.2_262)] to-[oklch(0.62_0.18_248)]",
   },
   {
-    title: "LedgerLite",
-    tagline: "Fintech ledger for African SMBs",
+    title: "Telecom & Data Services",
+    category: "Business",
+    tagline: "Affordable connectivity for the community",
     description:
-      "Double-entry accounting with mobile-money integrations, offline-first sync, and audit-ready exports.",
-    tags: ["React Native", "NestJS", "PostgreSQL"],
-    demo: "#",
-    github: "#",
+      "Providing affordable telecom and data services to customers for over 2 years, building a loyal customer base.",
+    tags: ["Retail", "Customer Loyalty"],
     accent: "from-[oklch(0.66_0.16_240)] to-[oklch(0.5_0.2_260)]",
+  },
+  {
+    title: "Computer Center",
+    category: "Business",
+    tagline: "Local tech services hub",
+    description:
+      "Established and currently managing a computer center providing tech services to the local community.",
+    tags: ["Tech Services", "Management"],
+    accent: "from-[oklch(0.58_0.18_250)] to-[oklch(0.42_0.2_264)]",
+  },
+  {
+    title: "Online Finance Talk",
+    category: "Public Speaking",
+    tagline: "Financial education session",
+    description:
+      "Hosted an online financial education session with colleagues, teaching practical money management and financial literacy.",
+    tags: ["Speaking", "Financial Literacy"],
+    accent: "from-[oklch(0.62_0.19_246)] to-[oklch(0.46_0.2_262)]",
+  },
+  {
+    title: "One-on-One Financial Coaching",
+    category: "Public Speaking",
+    tagline: "Personal money coaching",
+    description:
+      "Provided personal financial guidance and coaching to individuals, helping them make better money decisions.",
+    tags: ["Coaching", "Advisory"],
+    accent: "from-[oklch(0.7_0.13_244)] to-[oklch(0.5_0.19_258)]",
   },
 ];
 
 const SERVICES = [
   {
-    icon: Layers,
-    title: "Full-Stack Web Apps",
-    desc: "End-to-end product engineering — from schema design to pixel-perfect UI and deployment.",
+    icon: Globe,
+    title: "Website Design",
+    desc: "I design and build modern, professional websites for businesses and individuals using AI-powered tools. Whether you need a portfolio, business website, or landing page — I will bring your vision to life.",
   },
   {
-    icon: Rocket,
-    title: "MVP to Scale",
-    desc: "Ship your MVP in weeks, then architect for scale without rewrites.",
+    icon: Wallet,
+    title: "Financial Consulting",
+    desc: "I help individuals and small businesses understand their finances, manage their money wisely, and make better financial decisions. My accounting background ensures you get reliable and practical financial guidance.",
   },
   {
-    icon: Sparkles,
-    title: "AI Integrations",
-    desc: "Add intelligent features — chat, search, automation — powered by LLMs and vector stores.",
+    icon: Presentation,
+    title: "Public Speaking & Training",
+    desc: "I deliver engaging and impactful presentations and training sessions covering finance, personal development, and digital skills. Whether for a corporate event, school, or community gathering — I will inspire and educate your audience.",
   },
   {
-    icon: Wrench,
-    title: "Technical Consulting",
-    desc: "Architecture reviews, performance audits, and DevOps modernization.",
+    icon: Briefcase,
+    title: "Business Setup Consulting",
+    desc: "I help aspiring entrepreneurs plan, set up, and manage their businesses effectively. Drawing from my hands-on experience running multiple businesses, I provide practical guidance to help you start and grow successfully.",
   },
 ];
 
 const EXPERIENCE = [
   {
-    role: "Senior Full-Stack Engineer",
-    org: "Freelance / Contract",
-    period: "2023 — Present",
+    role: "Financial Secretary",
+    org: "NUASA — Federal University Wukari Chapter",
+    period: "2025 — Present",
     points: [
-      "Delivered production platforms for fintech, SaaS, and AI startups.",
-      "Led architecture for multi-region deployments and real-time systems.",
+      "Managing and recording all financial transactions of the association.",
+      "Maintaining accurate financial records and ensuring accountability.",
     ],
   },
   {
-    role: "Full-Stack Developer",
-    org: "Independent Studio",
-    period: "2021 — 2023",
+    role: "Assistant Financial Secretary",
+    org: "NUASA — Federal University Wukari Chapter",
+    period: "2024",
     points: [
-      "Built 15+ web apps with React, Node.js, and cloud-native stacks.",
-      "Introduced CI/CD pipelines cutting release time by 70%.",
+      "Supported financial management and record keeping of the association.",
+      "Gained hands-on experience in organizational accounting.",
     ],
   },
   {
-    role: "Software Developer",
-    org: "Early Career",
-    period: "2019 — 2021",
+    role: "Entrepreneur & Business Owner",
+    org: "Computer Center | Doughnut Business | Telecom & Data Services",
+    period: "2024 — Present",
     points: [
-      "Contributed to open-source and built internal tools.",
-      "Focused on clean architecture and developer experience.",
+      "Started and managed multiple businesses from 200 level.",
+      "Developed strong skills in operations, customer service, sales, and financial management.",
+    ],
+  },
+  {
+    role: "Public Speaker & Financial Coach",
+    org: "Independent",
+    period: "2022 — Present",
+    points: [
+      "Conducted online financial education sessions.",
+      "Delivered one-on-one financial coaching to help people manage money better.",
     ],
   },
 ];
@@ -190,48 +260,57 @@ const EXPERIENCE = [
 const EDUCATION = [
   {
     icon: GraduationCap,
-    title: "B.Sc. Computer Science",
-    org: "University",
-    year: "2019 — 2023",
+    title: "B.Sc Accounting",
+    org: "Federal University Wukari, Taraba State",
+    year: "2023 — Present (400 Level)",
+    desc: "Studying Accounting with a focus on financial reporting, public sector accounting, and financial management. Active member and Financial Secretary of NUASA Federal University Wukari Chapter.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Secondary School Certificate",
+    org: "Ondo Boys High School",
+    year: "Graduated 2023",
+    desc: "Completed secondary school education at one of Nigeria's reputable institutions.",
   },
   {
     icon: Award,
-    title: "AWS Certified Developer — Associate",
-    org: "Amazon Web Services",
-    year: "2024",
-  },
-  {
-    icon: Award,
-    title: "Meta Full-Stack Developer",
-    org: "Meta / Coursera",
-    year: "2023",
-  },
-  {
-    icon: Award,
-    title: "MongoDB Associate Developer",
-    org: "MongoDB University",
-    year: "2023",
+    title: "Public Speaking Certification",
+    org: "Global Speaker Academy — Issued by Emmanuel Edoh",
+    year: "2025",
+    desc: "Completed a professional public speaking program, developing skills in presentation, communication, audience engagement, and impactful delivery.",
   },
 ];
 
 const TESTIMONIALS = [
   {
     quote:
-      "Timmie shipped what our previous team couldn't in six months. Clean code, sharp architecture, and a real partner in the process.",
-    name: "Adaeze O.",
-    title: "CTO, Fintech Startup",
+      "Your advice really changed the way I managed my business. You taught me how to budget properly, separate business money from personal money, and reinvest my profits. Today, my business is growing steadily. I'm truly grateful!",
+    name: "Okoro Ogechi",
+    title: "Business Owner",
   },
   {
     quote:
-      "Exceptional engineer. He turned a rough concept into a polished product our users genuinely love.",
-    name: "Marcus L.",
-    title: "Founder, SaaS Platform",
+      "I remember when I was struggling to make good financial decisions in my business. Your advice on saving, controlling expenses, and managing cash flow helped me a lot. Today, I'm seeing real progress and better profits. Thank you so much!",
+    name: "Nkonyu Fortunate",
+    title: "Business Owner",
   },
   {
     quote:
-      "One of the most thoughtful developers I've worked with. Reliable, fast, and design-aware.",
-    name: "Priya S.",
-    title: "Product Lead",
+      "Your financial guidance gave me a better understanding of how to manage my business. I started keeping proper records and stopped spending my business capital unnecessarily. My business has improved tremendously, and I'm doing much better now.",
+    name: "Prayer Akintunde",
+    title: "Business Owner",
+  },
+  {
+    quote:
+      "I'm grateful for the financial advice you gave me when I was just starting out. Your advice on pricing, profit management, and reinvestment helped me build a stronger business. Today, my business is doing well, and I can confidently say your advice made a difference.",
+    name: "Blessing Okeke",
+    title: "Business Owner",
+  },
+  {
+    quote:
+      "Getting my business website built by you was one of the best decisions I made for my business. You didn't just help me create a beautiful website — you helped me understand how to present my brand professionally online and attract more customers. Since launching the website, my business has gained more visibility and credibility. I'm really grateful for your excellent work!",
+    name: "Josmay Digital Growth",
+    title: "Client | Web Design",
   },
 ];
 
@@ -454,23 +533,33 @@ function Nav({ active }: { active: string }) {
               exit={{ opacity: 0, y: -8 }}
               className="glass mt-2 rounded-2xl p-3 lg:hidden"
             >
-              <ul className="grid gap-1">
-                {NAV.map((n) => (
-                  <li key={n.id}>
-                    <a
-                      href={`#${n.id}`}
-                      onClick={() => setOpen(false)}
-                      className={`block rounded-lg px-3 py-2 text-sm ${
-                        active === n.id
-                          ? "bg-gradient-brand text-primary-foreground"
-                          : "hover:bg-secondary"
-                      }`}
-                    >
-                      {n.label}
-                    </a>
-                  </li>
+              <div className="grid gap-3">
+                {NAV_GROUPS.map((g) => (
+                  <div key={g.group}>
+                    <div className="px-3 pb-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                      {g.group}
+                    </div>
+                    <ul className="grid gap-1">
+                      {g.items.map((n) => (
+                        <li key={n.id}>
+                          <a
+                            href={`#${n.id}`}
+                            onClick={() => setOpen(false)}
+                            className={`block rounded-lg px-3 py-2 text-sm ${
+                              active === n.id
+                                ? "bg-gradient-brand text-primary-foreground"
+                                : "hover:bg-secondary"
+                            }`}
+                          >
+                            {n.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
+              </div>
+
             </motion.div>
           )}
         </AnimatePresence>
@@ -513,11 +602,22 @@ function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
+            transition={{ duration: 0.6, delay: 0.22 }}
             className="mt-6 max-w-xl font-display text-lg text-muted-foreground sm:text-xl"
           >
-            Full-Stack Developer <span className="text-electric">|</span> Building Scalable
-            Digital Experiences
+            Web Designer <span className="text-electric">|</span> Accounting Professional{" "}
+            <span className="text-electric">|</span> Entrepreneur{" "}
+            <span className="text-electric">|</span> Public Speaker
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.32 }}
+            className="mt-4 max-w-xl text-base text-muted-foreground"
+          >
+            Combining financial knowledge, business experience, and creative design to deliver
+            real value.
           </motion.p>
 
           <motion.div
@@ -530,16 +630,15 @@ function Hero() {
               href="#projects"
               className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5"
             >
-              View Projects
+              View My Projects
               <Rocket className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
             <a
-              href="/cv.pdf"
-              download
+              href="#contact"
               className="glass inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5"
             >
-              <Download className="h-4 w-4" />
-              Download CV
+              <Mail className="h-4 w-4" />
+              Contact Me
             </a>
           </motion.div>
 
@@ -547,20 +646,47 @@ function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-10 flex items-center gap-4 text-muted-foreground"
+            className="mt-10 flex flex-wrap items-center gap-4 text-muted-foreground"
           >
-            <a href="#" aria-label="GitHub" className="transition-colors hover:text-foreground">
-              <Github className="h-5 w-5" />
-            </a>
-            <a href="#" aria-label="LinkedIn" className="transition-colors hover:text-foreground">
+            <a
+              href={CONTACT.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="transition-colors hover:text-foreground"
+            >
               <Linkedin className="h-5 w-5" />
             </a>
-            <a href="#" aria-label="Twitter" className="transition-colors hover:text-foreground">
+            <a
+              href={CONTACT.instagram}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              className="transition-colors hover:text-foreground"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a
+              href={CONTACT.twitter}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Twitter"
+              className="transition-colors hover:text-foreground"
+            >
               <Twitter className="h-5 w-5" />
+            </a>
+            <a
+              href={CONTACT.whatsapp}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="WhatsApp"
+              className="transition-colors hover:text-foreground"
+            >
+              <MessageCircle className="h-5 w-5" />
             </a>
             <span className="mx-2 h-4 w-px bg-border" />
             <span className="inline-flex items-center gap-1.5 text-xs font-mono">
-              <MapPin className="h-3.5 w-3.5" /> Remote · Worldwide
+              <MapPin className="h-3.5 w-3.5" /> {CONTACT.location}
             </span>
           </motion.div>
         </div>
@@ -571,24 +697,28 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative mx-auto w-full max-w-md"
         >
-          <div className="glass relative rounded-3xl p-4 shadow-glow-lg">
-            <div className="flex items-center gap-1.5 border-b border-glass-border pb-3">
-              <span className="h-3 w-3 rounded-full bg-red-500/70" />
-              <span className="h-3 w-3 rounded-full bg-yellow-500/70" />
-              <span className="h-3 w-3 rounded-full bg-green-500/70" />
-              <span className="ml-3 font-mono text-xs text-muted-foreground">timmie.dev</span>
+          <div className="glass relative rounded-3xl p-6 shadow-glow-lg">
+            <div className="mx-auto grid h-40 w-40 place-items-center rounded-full bg-gradient-brand text-5xl font-display font-bold text-primary-foreground shadow-glow">
+              BT
             </div>
-            <pre className="mt-4 overflow-hidden font-mono text-[13px] leading-relaxed">
-{`const timmie = {
-  name: "Bolarinwa Timilehin",
-  role: "Full-Stack Developer",
-  stack: ["React", "Node", "Cloud", "AI"],
-  currentlyBuilding: () =>
-    "scalable products with taste",
-};
-
-export default timmie;`}
-            </pre>
+            <div className="mt-6 text-center">
+              <div className="font-display text-xl font-semibold">Timmie Hub</div>
+              <div className="mt-1 text-sm text-muted-foreground">
+                Technology · Accounting · Business
+              </div>
+            </div>
+            <div className="mt-6 grid grid-cols-3 gap-3 text-center">
+              {[
+                { k: "3+", v: "Yrs Speaking" },
+                { k: "3", v: "Businesses" },
+                { k: "400L", v: "Accounting" },
+              ].map((s) => (
+                <div key={s.v} className="rounded-xl border border-glass-border p-3">
+                  <div className="font-display text-lg font-bold text-gradient">{s.k}</div>
+                  <div className="text-[11px] text-muted-foreground">{s.v}</div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-brand opacity-30 blur-3xl" />
         </motion.div>
@@ -599,51 +729,70 @@ export default timmie;`}
 
 function About() {
   const stats = [
-    { k: "5+", v: "Years Experience" },
-    { k: "30+", v: "Projects Shipped" },
-    { k: "15+", v: "Happy Clients" },
-    { k: "6", v: "Certifications" },
+    { k: "3+", v: "Years Public Speaking" },
+    { k: "3", v: "Businesses Run" },
+    { k: "2+", v: "Websites Delivered" },
+    { k: "400L", v: "B.Sc Accounting" },
   ];
   return (
     <Section id="about">
       <SectionTitle eyebrow="01 // About" title="About Me" />
-      <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+      <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="glass rounded-3xl p-8 text-lg leading-relaxed text-muted-foreground"
+          className="space-y-4"
         >
-          <p>
-            I'm <span className="text-foreground font-medium">Bolarinwa Timilehin Hezekiah</span>{" "}
-            — a full-stack engineer obsessed with turning ambitious ideas into products people love
-            to use. I design and build the whole stack: performant interfaces, dependable APIs, and
-            cloud infrastructure that scales without drama.
-          </p>
-          <p className="mt-4">
-            Under the brand <span className="text-gradient font-semibold">Timmie Hub</span>, I
-            partner with founders and teams to ship polished MVPs, modernize legacy systems, and
-            integrate AI where it genuinely moves the needle. Clean code, thoughtful UX, and honest
-            engineering — that's the standard.
-          </p>
+          <div className="glass relative overflow-hidden rounded-3xl p-2">
+            <div className="grid aspect-[4/5] w-full place-items-center rounded-2xl bg-gradient-brand">
+              <span className="font-display text-6xl font-bold text-primary-foreground">BTH</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {stats.map((s) => (
+              <div key={s.v} className="glass rounded-2xl p-4">
+                <div className="text-2xl font-bold text-gradient">{s.k}</div>
+                <div className="mt-1 text-xs text-muted-foreground">{s.v}</div>
+              </div>
+            ))}
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-4">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.v}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="glass rounded-2xl p-6"
-            >
-              <div className="text-4xl font-bold text-gradient">{s.k}</div>
-              <div className="mt-1 text-sm text-muted-foreground">{s.v}</div>
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="glass space-y-4 rounded-3xl p-8 leading-relaxed text-muted-foreground"
+        >
+          <p>
+            My name is{" "}
+            <span className="font-medium text-foreground">Bolarinwa Timilehin Hezekiah</span>, a
+            multi-skilled professional driven by a passion for technology, business, and financial
+            empowerment.
+          </p>
+          <p>
+            I am currently studying Accounting at Federal University Wukari, Taraba State — not
+            just to earn a degree, but to build the knowledge needed to help individuals and
+            businesses understand finance, make money, and grow their wealth.
+          </p>
+          <p>
+            With over 3 years of experience in public speaking, I have developed the ability to
+            communicate ideas clearly, inspire audiences, and deliver value through every word.
+          </p>
+          <p>
+            As an entrepreneur, I run a computer center, a food business, and a telecom service —
+            giving me real hands-on experience in business operations, customer service, and
+            financial management.
+          </p>
+          <p>
+            Today I am combining all of these skills with{" "}
+            <span className="font-semibold text-gradient">AI-powered web design</span> — building
+            modern, professional websites that help businesses grow in the digital world.
+          </p>
+        </motion.div>
       </div>
     </Section>
   );
@@ -654,10 +803,10 @@ function Skills() {
     <Section id="skills">
       <SectionTitle
         eyebrow="02 // Toolkit"
-        title="Skills & Stack"
-        sub="Battle-tested tools I reach for to ship reliable, fast, and delightful products."
+        title="Skills"
+        sub="Four disciplines that combine into one practical, value-driven skill set."
       />
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2">
         {SKILLS.map((s, i) => (
           <motion.div
             key={s.title}
@@ -679,7 +828,7 @@ function Skills() {
               {s.items.map((it) => (
                 <li
                   key={it}
-                  className="rounded-full border border-glass-border bg-secondary/40 px-3 py-1 text-xs font-mono text-muted-foreground"
+                  className="rounded-full border border-glass-border bg-secondary/40 px-3 py-1 text-xs text-muted-foreground"
                 >
                   {it}
                 </li>
@@ -693,21 +842,43 @@ function Skills() {
 }
 
 function Projects() {
+  const [filter, setFilter] = useState<(typeof PROJECT_CATEGORIES)[number]>("All");
+  const list = PROJECTS.filter((p) => filter === "All" || p.category === filter);
+
   return (
     <Section id="projects">
       <SectionTitle
         eyebrow="03 // Work"
-        title="Featured Projects"
-        sub="A selection of products I've designed, engineered, and shipped."
+        title="Projects"
+        sub="Selected work across web design, business, and public speaking."
       />
+      <div className="mb-8 flex flex-wrap gap-2" role="tablist" aria-label="Project categories">
+        {PROJECT_CATEGORIES.map((c) => (
+          <button
+            key={c}
+            role="tab"
+            aria-selected={filter === c}
+            onClick={() => setFilter(c)}
+            className={`rounded-full px-4 py-2 text-sm transition-colors ${
+              filter === c
+                ? "bg-gradient-brand text-primary-foreground shadow-glow"
+                : "glass text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
+
       <div className="grid gap-6 md:grid-cols-2">
-        {PROJECTS.map((p, i) => (
+        {list.map((p, i) => (
           <motion.article
             key={p.title}
+            layout
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: i * 0.08 }}
+            transition={{ duration: 0.5, delay: i * 0.06 }}
             whileHover={{ y: -6 }}
             className="glass group relative overflow-hidden rounded-3xl p-6"
           >
@@ -716,10 +887,10 @@ function Projects() {
             >
               <div className="absolute inset-0 grid-bg opacity-40" />
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                <span className="font-mono text-xs uppercase tracking-widest text-white/80">
-                  Case Study
+                <span className="font-mono text-xs uppercase tracking-widest text-primary-foreground/80">
+                  {p.category}
                 </span>
-                <span className="font-display text-2xl font-bold text-white/90">
+                <span className="font-display text-2xl font-bold text-primary-foreground/90">
                   0{i + 1}
                 </span>
               </div>
@@ -730,22 +901,15 @@ function Projects() {
                 <h3 className="font-display text-xl font-semibold">{p.title}</h3>
                 <p className="text-sm text-muted-foreground">{p.tagline}</p>
               </div>
-              <div className="flex gap-2">
-                <a
-                  href={p.github}
-                  aria-label={`${p.title} GitHub`}
-                  className="grid h-9 w-9 place-items-center rounded-lg border border-glass-border transition-colors hover:bg-secondary"
-                >
-                  <Github className="h-4 w-4" />
-                </a>
+              {"demo" in p && p.demo && (
                 <a
                   href={p.demo}
-                  aria-label={`${p.title} live demo`}
-                  className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-brand text-primary-foreground"
+                  aria-label={`${p.title} details`}
+                  className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-brand text-primary-foreground"
                 >
                   <ExternalLink className="h-4 w-4" />
                 </a>
-              </div>
+              )}
             </div>
 
             <p className="mt-4 text-sm text-muted-foreground">{p.description}</p>
@@ -753,7 +917,7 @@ function Projects() {
               {p.tags.map((t) => (
                 <li
                   key={t}
-                  className="rounded-full border border-glass-border px-2.5 py-0.5 text-[11px] font-mono text-muted-foreground"
+                  className="rounded-full border border-glass-border px-2.5 py-0.5 text-[11px] text-muted-foreground"
                 >
                   {t}
                 </li>
@@ -772,7 +936,7 @@ function Services() {
       <SectionTitle
         eyebrow="04 // Services"
         title="How I Can Help"
-        sub="Engagements tailored to your stage — from zero to scale."
+        sub="Practical services built on design, finance, speaking, and business experience."
       />
       <div className="grid gap-5 md:grid-cols-2">
         {SERVICES.map((s, i) => (
@@ -782,6 +946,7 @@ function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.07 }}
+            whileHover={{ y: -4 }}
             className="glass flex gap-5 rounded-2xl p-6"
           >
             <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground shadow-glow">
@@ -793,6 +958,18 @@ function Services() {
             </div>
           </motion.div>
         ))}
+      </div>
+      <div className="glass mt-8 flex flex-col items-center justify-between gap-4 rounded-2xl p-6 sm:flex-row">
+        <p className="text-sm text-muted-foreground">
+          Ready to start a project or get financial guidance?
+        </p>
+        <a
+          href="#contact"
+          className="inline-flex items-center gap-2 rounded-xl bg-gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5"
+        >
+          Contact Me / Get Started
+          <Send className="h-4 w-4" />
+        </a>
       </div>
     </Section>
   );
@@ -817,7 +994,7 @@ function Experience() {
               }`}
             >
               <div className={`sm:pr-10 ${i % 2 === 1 ? "sm:order-2 sm:pl-10 sm:pr-0" : ""}`}>
-                <div className="glass rounded-2xl p-6">
+                <div className="glass ml-10 rounded-2xl p-6 sm:ml-0">
                   <div className="flex items-center gap-2 text-electric">
                     <Briefcase className="h-4 w-4" />
                     <span className="font-mono text-xs uppercase tracking-widest">
@@ -849,7 +1026,7 @@ function Education() {
   return (
     <Section id="education">
       <SectionTitle eyebrow="06 // Credentials" title="Education & Certifications" />
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-3">
         {EDUCATION.map((e, i) => (
           <motion.div
             key={e.title}
@@ -857,16 +1034,16 @@ function Education() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.07 }}
-            className="glass flex items-start gap-4 rounded-2xl p-6"
+            whileHover={{ y: -4 }}
+            className="glass rounded-2xl p-6"
           >
-            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
+            <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
               <e.icon className="h-5 w-5" />
             </div>
-            <div className="min-w-0">
-              <h3 className="font-display font-semibold">{e.title}</h3>
-              <p className="text-sm text-muted-foreground">{e.org}</p>
-              <p className="mt-1 font-mono text-xs text-electric">{e.year}</p>
-            </div>
+            <h3 className="mt-4 font-display font-semibold">{e.title}</h3>
+            <p className="text-sm text-muted-foreground">{e.org}</p>
+            <p className="mt-1 font-mono text-xs text-electric">{e.year}</p>
+            <p className="mt-3 text-sm text-muted-foreground">{e.desc}</p>
           </motion.div>
         ))}
       </div>
@@ -877,8 +1054,12 @@ function Education() {
 function Testimonials() {
   return (
     <Section id="testimonials">
-      <SectionTitle eyebrow="07 // Kind Words" title="Testimonials" />
-      <div className="grid gap-5 md:grid-cols-3">
+      <SectionTitle
+        eyebrow="07 // Kind Words"
+        title="Testimonials"
+        sub="Results from business owners and clients I've worked with."
+      />
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {TESTIMONIALS.map((t, i) => (
           <motion.blockquote
             key={t.name}
@@ -886,6 +1067,7 @@ function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
+            whileHover={{ y: -4 }}
             className="glass relative rounded-2xl p-6"
           >
             <Quote className="h-6 w-6 text-electric opacity-70" />
@@ -901,88 +1083,17 @@ function Testimonials() {
   );
 }
 
-function GitHubShowcase() {
-  const weeks = 26;
-  const days = 7;
-  const grid = useMemo(
-    () =>
-      Array.from({ length: weeks }, () =>
-        Array.from({ length: days }, () => Math.floor(Math.random() * 5)),
-      ),
-    [],
-  );
-  const colors = [
-    "oklch(0.55 0.19 258 / 0.12)",
-    "oklch(0.7 0.13 250 / 0.45)",
-    "oklch(0.62 0.17 255 / 0.7)",
-    "oklch(0.55 0.19 258)",
-    "oklch(0.42 0.2 262)",
-  ];
 
-  return (
-    <Section id="github">
-      <SectionTitle
-        eyebrow="08 // Open Source"
-        title="GitHub Activity"
-        sub="A snapshot of consistent, focused work across projects."
-      />
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="glass rounded-3xl p-6 sm:p-8"
-      >
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <div className="font-display text-lg font-semibold">@timmiehub</div>
-            <div className="text-xs text-muted-foreground font-mono">
-              1,240+ contributions in the last year
-            </div>
-          </div>
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 rounded-lg border border-glass-border px-3 py-1.5 text-xs transition-colors hover:bg-secondary"
-          >
-            <Github className="h-3.5 w-3.5" /> View Profile
-          </a>
-        </div>
-
-        <div className="mt-6 overflow-x-auto">
-          <div className="flex gap-1">
-            {grid.map((week, wi) => (
-              <div key={wi} className="flex flex-col gap-1">
-                {week.map((v, di) => (
-                  <motion.span
-                    key={di}
-                    initial={{ opacity: 0, scale: 0.6 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.2, delay: (wi * days + di) * 0.004 }}
-                    className="h-3 w-3 rounded-[3px]"
-                    style={{ backgroundColor: colors[v] }}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-4 flex items-center justify-end gap-2 text-[11px] font-mono text-muted-foreground">
-          <span>Less</span>
-          {colors.map((c, i) => (
-            <span key={i} className="h-3 w-3 rounded-[3px]" style={{ backgroundColor: c }} />
-          ))}
-          <span>More</span>
-        </div>
-      </motion.div>
-    </Section>
-  );
-}
+const SOCIALS = [
+  { icon: Linkedin, label: "LinkedIn — Timilehin Hezekiah Bolarinwa", href: CONTACT.linkedin },
+  { icon: Instagram, label: "Instagram — Timilehin Hezekiah Bolarinwa", href: CONTACT.instagram },
+  { icon: Twitter, label: "Twitter/X — Timilehin Hezekiah Bolarinwa", href: CONTACT.twitter },
+  { icon: MessageCircle, label: `WhatsApp — ${CONTACT.phone}`, href: CONTACT.whatsapp },
+];
 
 function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   function validate() {
@@ -990,6 +1101,8 @@ function Contact() {
     if (!form.name.trim() || form.name.length > 100) e.name = "Enter your name (max 100 chars).";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) || form.email.length > 255)
       e.email = "Enter a valid email.";
+    if (!form.subject.trim() || form.subject.length > 150)
+      e.subject = "Enter a subject (max 150 chars).";
     if (!form.message.trim() || form.message.length > 1000)
       e.message = "Message required (max 1000 chars).";
     setErrors(e);
@@ -1000,52 +1113,75 @@ function Contact() {
     ev.preventDefault();
     if (!validate()) return;
     setStatus("sending");
-    // Simulated send — wire up to a server function or email service later.
-    await new Promise((r) => setTimeout(r, 900));
+    const body = `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`;
+    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
+      form.subject,
+    )}&body=${encodeURIComponent(body)}`;
+    await new Promise((r) => setTimeout(r, 600));
     setStatus("sent");
-    setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setStatus("idle"), 4000);
+    setForm({ name: "", email: "", subject: "", message: "" });
+    setTimeout(() => setStatus("idle"), 5000);
   }
+
+  const inputClass =
+    "w-full rounded-xl border border-glass-border bg-background/40 px-4 py-3 text-sm outline-none transition-colors focus:border-electric";
+  const labelClass =
+    "mb-1.5 block text-xs font-mono uppercase tracking-widest text-muted-foreground";
 
   return (
     <Section id="contact">
       <SectionTitle
-        eyebrow="09 // Contact"
-        title="Let's Build Something"
-        sub="Have a project in mind? I'd love to hear about it."
+        eyebrow="08 // Contact"
+        title="Get In Touch"
+        sub="I am available for freelance web design projects, financial consulting, public speaking engagements, and business consulting. Feel free to reach out through any of the channels below."
       />
       <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
         <div className="space-y-4">
           <a
-            href="mailto:hello@timmiehub.dev"
+            href={`mailto:${CONTACT.email}`}
             className="glass flex items-center gap-4 rounded-2xl p-5 transition-transform hover:-translate-y-0.5"
           >
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
               <Mail className="h-5 w-5" />
             </div>
+            <div className="min-w-0">
+              <div className="font-mono text-xs text-muted-foreground">Email</div>
+              <div className="truncate font-display text-sm font-semibold">{CONTACT.email}</div>
+            </div>
+          </a>
+          <a
+            href={CONTACT.phoneHref}
+            className="glass flex items-center gap-4 rounded-2xl p-5 transition-transform hover:-translate-y-0.5"
+          >
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
+              <Phone className="h-5 w-5" />
+            </div>
             <div>
-              <div className="text-xs text-muted-foreground font-mono">Email</div>
-              <div className="font-display font-semibold">hello@timmiehub.dev</div>
+              <div className="font-mono text-xs text-muted-foreground">Phone</div>
+              <div className="font-display font-semibold">{CONTACT.phone}</div>
             </div>
           </a>
           <div className="glass flex items-center gap-4 rounded-2xl p-5">
-            <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-brand text-primary-foreground">
               <MapPin className="h-5 w-5" />
             </div>
             <div>
-              <div className="text-xs text-muted-foreground font-mono">Based in</div>
-              <div className="font-display font-semibold">Lagos, Nigeria · Remote</div>
+              <div className="font-mono text-xs text-muted-foreground">Location</div>
+              <div className="font-display font-semibold">{CONTACT.location}</div>
             </div>
           </div>
           <div className="flex gap-3">
-            {[Github, Linkedin, Twitter].map((Icon, i) => (
+            {SOCIALS.map((s) => (
               <a
-                key={i}
-                href="#"
-                aria-label="Social link"
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={s.label}
+                title={s.label}
                 className="glass grid h-11 w-11 place-items-center rounded-xl transition-transform hover:-translate-y-0.5"
               >
-                <Icon className="h-5 w-5" />
+                <s.icon className="h-5 w-5" />
               </a>
             ))}
           </div>
@@ -1054,9 +1190,7 @@ function Contact() {
         <form onSubmit={onSubmit} className="glass rounded-2xl p-6 sm:p-8" noValidate>
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block">
-              <span className="mb-1.5 block text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                Name
-              </span>
+              <span className={labelClass}>Name</span>
               <input
                 type="text"
                 value={form.name}
@@ -1064,14 +1198,12 @@ function Contact() {
                 maxLength={100}
                 required
                 aria-invalid={!!errors.name}
-                className="w-full rounded-xl border border-glass-border bg-background/40 px-4 py-3 text-sm outline-none transition-colors focus:border-electric"
+                className={inputClass}
               />
               {errors.name && <p className="mt-1 text-xs text-destructive">{errors.name}</p>}
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                Email
-              </span>
+              <span className={labelClass}>Email</span>
               <input
                 type="email"
                 value={form.email}
@@ -1079,15 +1211,26 @@ function Contact() {
                 maxLength={255}
                 required
                 aria-invalid={!!errors.email}
-                className="w-full rounded-xl border border-glass-border bg-background/40 px-4 py-3 text-sm outline-none transition-colors focus:border-electric"
+                className={inputClass}
               />
               {errors.email && <p className="mt-1 text-xs text-destructive">{errors.email}</p>}
             </label>
           </div>
           <label className="mt-4 block">
-            <span className="mb-1.5 block text-xs font-mono uppercase tracking-widest text-muted-foreground">
-              Message
-            </span>
+            <span className={labelClass}>Subject</span>
+            <input
+              type="text"
+              value={form.subject}
+              onChange={(e) => setForm({ ...form, subject: e.target.value })}
+              maxLength={150}
+              required
+              aria-invalid={!!errors.subject}
+              className={inputClass}
+            />
+            {errors.subject && <p className="mt-1 text-xs text-destructive">{errors.subject}</p>}
+          </label>
+          <label className="mt-4 block">
+            <span className={labelClass}>Message</span>
             <textarea
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -1095,14 +1238,14 @@ function Contact() {
               required
               rows={5}
               aria-invalid={!!errors.message}
-              className="w-full resize-none rounded-xl border border-glass-border bg-background/40 px-4 py-3 text-sm outline-none transition-colors focus:border-electric"
+              className={`${inputClass} resize-none`}
             />
             {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message}</p>}
           </label>
 
           <div className="mt-6 flex items-center justify-between gap-4">
-            <span className="text-xs text-muted-foreground">
-              {status === "sent" && "✓ Message sent — I'll get back within 24h."}
+            <span className="text-xs text-muted-foreground" role="status">
+              {status === "sent" && "✓ Thanks — your mail app should now be open."}
               {status === "error" && "Something went wrong. Try again."}
             </span>
             <button
@@ -1125,24 +1268,31 @@ function Footer() {
     <footer className="border-t border-glass-border py-10">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 sm:flex-row">
         <div className="flex items-center gap-2">
-          <span className="grid h-7 w-7 place-items-center rounded-md bg-gradient-brand text-primary-foreground text-sm font-bold">
+          <span className="grid h-7 w-7 place-items-center rounded-md bg-gradient-brand text-sm font-bold text-primary-foreground">
             T
           </span>
           <span className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Timmie Hub. Crafted with intent.
+            © {new Date().getFullYear()} Timmie Hub. Built with intent.
           </span>
         </div>
         <div className="flex items-center gap-4 text-muted-foreground">
-          <a href="#" aria-label="GitHub" className="hover:text-foreground">
-            <Github className="h-4 w-4" />
-          </a>
-          <a href="#" aria-label="LinkedIn" className="hover:text-foreground">
-            <Linkedin className="h-4 w-4" />
-          </a>
-          <a href="#" aria-label="Twitter" className="hover:text-foreground">
-            <Twitter className="h-4 w-4" />
-          </a>
-          <a href="mailto:hello@timmiehub.dev" aria-label="Email" className="hover:text-foreground">
+          {SOCIALS.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={s.label}
+              className="hover:text-foreground"
+            >
+              <s.icon className="h-4 w-4" />
+            </a>
+          ))}
+          <a
+            href={`mailto:${CONTACT.email}`}
+            aria-label="Email"
+            className="hover:text-foreground"
+          >
             <Mail className="h-4 w-4" />
           </a>
         </div>
@@ -1207,7 +1357,6 @@ function Portfolio() {
         <Experience />
         <Education />
         <Testimonials />
-        <GitHubShowcase />
         <Contact />
       </main>
       <Footer />
