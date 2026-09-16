@@ -702,7 +702,7 @@ function Hero() {
               ))}
             </div>
           </div>
-          <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-brand opacity-30 blur-3xl" />
+          <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-brand opacity-15 blur-3xl" />
         </motion.div>
       </div>
     </Section>
@@ -718,7 +718,7 @@ function About() {
   ];
   return (
     <Section id="about">
-      <SectionTitle eyebrow="01 // About" title="About Me" />
+      <SectionTitle eyebrow="01 About" title="About Me" />
       <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -728,8 +728,8 @@ function About() {
           className="space-y-4"
         >
           <div className="glass relative overflow-hidden rounded-3xl p-2">
-            <div className="grid aspect-[4/5] w-full place-items-center rounded-2xl bg-gradient-brand">
-              <span className="font-display text-6xl font-bold text-primary-foreground">BTH</span>
+            <div className="grid aspect-[4/5] w-full place-items-center rounded-2xl border border-glass-border bg-secondary">
+              <span className="font-display text-6xl font-bold text-gradient">BTH</span>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -784,7 +784,7 @@ function Skills() {
   return (
     <Section id="skills">
       <SectionTitle
-        eyebrow="02 // Toolkit"
+        eyebrow="02 Toolkit"
         title="Skills"
         sub="Four disciplines that combine into one practical, value-driven skill set."
       />
@@ -830,7 +830,7 @@ function Projects() {
   return (
     <Section id="projects">
       <SectionTitle
-        eyebrow="03 // Work"
+        eyebrow="03 Work"
         title="Projects"
         sub="Selected work across web design, business, and public speaking."
       />
@@ -916,7 +916,7 @@ function Services() {
   return (
     <Section id="services">
       <SectionTitle
-        eyebrow="04 // Services"
+        eyebrow="04 Services"
         title="How I Can Help"
         sub="Practical services built on design, finance, speaking, and business experience."
       />
@@ -960,7 +960,7 @@ function Services() {
 function Experience() {
   return (
     <Section id="experience">
-      <SectionTitle eyebrow="05 // Journey" title="Experience" />
+      <SectionTitle eyebrow="05 Journey" title="Experience" />
       <div className="relative">
         <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-electric via-violet to-transparent sm:left-1/2" />
         <div className="space-y-10">
@@ -1007,7 +1007,7 @@ function Experience() {
 function Education() {
   return (
     <Section id="education">
-      <SectionTitle eyebrow="06 // Credentials" title="Education & Certifications" />
+      <SectionTitle eyebrow="06 Credentials" title="Education & Certifications" />
       <div className="grid gap-4 md:grid-cols-3">
         {EDUCATION.map((e, i) => (
           <motion.div
@@ -1037,7 +1037,7 @@ function Testimonials() {
   return (
     <Section id="testimonials">
       <SectionTitle
-        eyebrow="07 // Kind Words"
+        eyebrow="07 Kind Words"
         title="Testimonials"
         sub="Results from business owners and clients I've worked with."
       />
@@ -1113,7 +1113,7 @@ function Contact() {
   return (
     <Section id="contact">
       <SectionTitle
-        eyebrow="08 // Contact"
+        eyebrow="08 Contact"
         title="Get In Touch"
         sub="I am available for freelance web design projects, financial consulting, public speaking engagements, and business consulting. Feel free to reach out through any of the channels below."
       />
