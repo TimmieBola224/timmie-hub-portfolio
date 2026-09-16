@@ -34,13 +34,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Timmie Hub — Bolarinwa Timilehin Hezekiah | Web Design & Finance" },
+      { title: "Timmie Hub | Bolarinwa Timilehin Hezekiah" },
       {
         name: "description",
         content:
-          "Bolarinwa Timilehin Hezekiah — web designer, accounting professional, entrepreneur, and public speaker. AI-powered websites, financial consulting, training, and business setup.",
+          "Bolarinwa Timilehin Hezekiah is a web designer, accounting professional, entrepreneur, and public speaker. AI-powered websites, financial consulting, training, and business setup.",
       },
-      { property: "og:title", content: "Timmie Hub — Bolarinwa Timilehin Hezekiah" },
+      { property: "og:title", content: "Timmie Hub, Bolarinwa Timilehin Hezekiah" },
       {
         property: "og:description",
         content:
@@ -136,26 +136,26 @@ const PROJECTS = [
       "A personal portfolio website designed and built using AI-powered web design tools. Showcases my skills, services, and experience across web design, accounting, and entrepreneurship.",
     tags: ["Lovable", "Web Design", "Personal Brand"],
     demo: "#home",
-    accent: "from-[oklch(0.6_0.2_255)] to-[oklch(0.45_0.2_262)]",
+    accent: "from-[#d4af37] to-[#f5c842]",
   },
   {
     title: "Josmay Digital Growth",
     category: "Web Design",
-    tagline: "Client website — digital skills platform",
+    tagline: "Client website for a digital skills platform",
     description:
-      "A client project — designed and built a modern website for Josmay Digital Growth, a platform where people learn valuable digital skills. Delivered a clean, professional, and user-friendly website to help the client establish their online presence.",
+      "A client project. I designed and built a modern website for Josmay Digital Growth, a platform where people learn valuable digital skills. Delivered a clean, professional, and user-friendly website to help the client establish their online presence.",
     tags: ["Client Work", "Landing Page", "Branding"],
     demo: "#contact",
-    accent: "from-[oklch(0.55_0.19_258)] to-[oklch(0.68_0.15_235)]",
+    accent: "from-[#b8952e] to-[#d4af37]",
   },
   {
-    title: "Food Business — Doughnut Sales",
+    title: "Food Business, Doughnut Sales",
     category: "Business",
     tagline: "2+ years of daily operations",
     description:
       "Running a successful doughnut business for over 2 years, managing daily operations, customer service, and sales.",
     tags: ["Operations", "Sales", "Customer Service"],
-    accent: "from-[oklch(0.45_0.2_262)] to-[oklch(0.62_0.18_248)]",
+    accent: "from-[#f5c842] to-[#8c6f1f]",
   },
   {
     title: "Telecom & Data Services",
@@ -164,7 +164,7 @@ const PROJECTS = [
     description:
       "Providing affordable telecom and data services to customers for over 2 years, building a loyal customer base.",
     tags: ["Retail", "Customer Loyalty"],
-    accent: "from-[oklch(0.66_0.16_240)] to-[oklch(0.5_0.2_260)]",
+    accent: "from-[#d4af37] to-[#8c6f1f]",
   },
   {
     title: "Computer Center",
@@ -173,7 +173,7 @@ const PROJECTS = [
     description:
       "Established and currently managing a computer center providing tech services to the local community.",
     tags: ["Tech Services", "Management"],
-    accent: "from-[oklch(0.58_0.18_250)] to-[oklch(0.42_0.2_264)]",
+    accent: "from-[#e0bd52] to-[#b8952e]",
   },
   {
     title: "Online Finance Talk",
@@ -182,7 +182,7 @@ const PROJECTS = [
     description:
       "Hosted an online financial education session with colleagues, teaching practical money management and financial literacy.",
     tags: ["Speaking", "Financial Literacy"],
-    accent: "from-[oklch(0.62_0.19_246)] to-[oklch(0.46_0.2_262)]",
+    accent: "from-[#f5c842] to-[#d4af37]",
   },
   {
     title: "One-on-One Financial Coaching",
@@ -191,7 +191,7 @@ const PROJECTS = [
     description:
       "Provided personal financial guidance and coaching to individuals, helping them make better money decisions.",
     tags: ["Coaching", "Advisory"],
-    accent: "from-[oklch(0.7_0.13_244)] to-[oklch(0.5_0.19_258)]",
+    accent: "from-[#c9a233] to-[#f0d27a]",
   },
 ];
 
@@ -199,7 +199,7 @@ const SERVICES = [
   {
     icon: Globe,
     title: "Website Design",
-    desc: "I design and build modern, professional websites for businesses and individuals using AI-powered tools. Whether you need a portfolio, business website, or landing page — I will bring your vision to life.",
+    desc: "I design and build modern, professional websites for businesses and individuals using AI-powered tools. Whether you need a portfolio, business website, or landing page, I will bring your vision to life.",
   },
   {
     icon: Wallet,
@@ -209,7 +209,7 @@ const SERVICES = [
   {
     icon: Presentation,
     title: "Public Speaking & Training",
-    desc: "I deliver engaging and impactful presentations and training sessions covering finance, personal development, and digital skills. Whether for a corporate event, school, or community gathering — I will inspire and educate your audience.",
+    desc: "I deliver engaging and impactful presentations and training sessions covering finance, personal development, and digital skills. Whether for a corporate event, school, or community gathering, I will inspire and educate your audience.",
   },
   {
     icon: Briefcase,
@@ -221,7 +221,7 @@ const SERVICES = [
 const EXPERIENCE = [
   {
     role: "Financial Secretary",
-    org: "NUASA — Federal University Wukari Chapter",
+    org: "NUASA, Federal University Wukari Chapter",
     period: "2025 — Present",
     points: [
       "Managing and recording all financial transactions of the association.",
@@ -230,7 +230,7 @@ const EXPERIENCE = [
   },
   {
     role: "Assistant Financial Secretary",
-    org: "NUASA — Federal University Wukari Chapter",
+    org: "NUASA, Federal University Wukari Chapter",
     period: "2024",
     points: [
       "Supported financial management and record keeping of the association.",
@@ -239,7 +239,7 @@ const EXPERIENCE = [
   },
   {
     role: "Entrepreneur & Business Owner",
-    org: "Computer Center | Doughnut Business | Telecom & Data Services",
+    org: "Computer Center, Doughnut Business, Telecom and Data Services",
     period: "2024 — Present",
     points: [
       "Started and managed multiple businesses from 200 level.",
@@ -275,7 +275,7 @@ const EDUCATION = [
   {
     icon: Award,
     title: "Public Speaking Certification",
-    org: "Global Speaker Academy — Issued by Emmanuel Edoh",
+    org: "Global Speaker Academy, issued by Emmanuel Edoh",
     year: "2025",
     desc: "Completed a professional public speaking program, developing skills in presentation, communication, audience engagement, and impactful delivery.",
   },
@@ -285,7 +285,7 @@ const TESTIMONIALS = [
   {
     quote:
       "Your advice really changed the way I managed my business. You taught me how to budget properly, separate business money from personal money, and reinvest my profits. Today, my business is growing steadily. I'm truly grateful!",
-    name: "Okoro Ogechi",
+    name: "Okore Ogechi",
     title: "Business Owner",
   },
   {
@@ -310,7 +310,7 @@ const TESTIMONIALS = [
     quote:
       "Getting my business website built by you was one of the best decisions I made for my business. You didn't just help me create a beautiful website — you helped me understand how to present my brand professionally online and attract more customers. Since launching the website, my business has gained more visibility and credibility. I'm really grateful for your excellent work!",
     name: "Josmay Digital Growth",
-    title: "Client | Web Design",
+    title: "Client, Web Design",
   },
 ];
 
@@ -362,7 +362,6 @@ function ParticleField() {
     [],
   );
 
-  const codeSnippets = ["const build = () =>", "async function ship()", "<Portfolio />", "return <Elegance/>", "// 0 → 1", "npm run scale"];
 
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
@@ -375,8 +374,6 @@ function ParticleField() {
           animationDelay: "-10s",
         }}
       />
-      {/* Grid */}
-      <div className="absolute inset-0 grid-bg opacity-60" />
       {/* Particles */}
       {particles.map((p) => (
         <span
@@ -392,19 +389,6 @@ function ParticleField() {
             boxShadow: "0 0 8px var(--electric)",
           }}
         />
-      ))}
-      {/* Floating code fragments */}
-      {codeSnippets.map((s, i) => (
-        <span
-          key={s}
-          className="absolute font-mono text-xs text-muted-foreground/40 select-none"
-          style={{
-            left: `${(i * 17 + 8) % 90}%`,
-            top: `${(i * 23 + 12) % 85}%`,
-          }}
-        >
-          {s}
-        </span>
       ))}
     </div>
   );
@@ -605,9 +589,7 @@ function Hero() {
             transition={{ duration: 0.6, delay: 0.22 }}
             className="mt-6 max-w-xl font-display text-lg text-muted-foreground sm:text-xl"
           >
-            Web Designer <span className="text-electric">|</span> Accounting Professional{" "}
-            <span className="text-electric">|</span> Entrepreneur{" "}
-            <span className="text-electric">|</span> Public Speaker
+            Web Designer, Accounting Professional, Entrepreneur and Public Speaker
           </motion.p>
 
           <motion.p
@@ -774,7 +756,7 @@ function About() {
             empowerment.
           </p>
           <p>
-            I am currently studying Accounting at Federal University Wukari, Taraba State — not
+            I am currently studying Accounting at Federal University Wukari, Taraba State, not
             just to earn a degree, but to build the knowledge needed to help individuals and
             businesses understand finance, make money, and grow their wealth.
           </p>
@@ -783,13 +765,13 @@ function About() {
             communicate ideas clearly, inspire audiences, and deliver value through every word.
           </p>
           <p>
-            As an entrepreneur, I run a computer center, a food business, and a telecom service —
+            As an entrepreneur, I run a computer center, a food business, and a telecom service,
             giving me real hands-on experience in business operations, customer service, and
             financial management.
           </p>
           <p>
             Today I am combining all of these skills with{" "}
-            <span className="font-semibold text-gradient">AI-powered web design</span> — building
+            <span className="font-semibold text-gradient">AI-powered web design</span>, building
             modern, professional websites that help businesses grow in the digital world.
           </p>
         </motion.div>
@@ -885,7 +867,7 @@ function Projects() {
             <div
               className={`aspect-[16/9] w-full overflow-hidden rounded-2xl bg-gradient-to-br ${p.accent} relative`}
             >
-              <div className="absolute inset-0 grid-bg opacity-40" />
+              
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                 <span className="font-mono text-xs uppercase tracking-widest text-primary-foreground/80">
                   {p.category}
@@ -1085,10 +1067,10 @@ function Testimonials() {
 
 
 const SOCIALS = [
-  { icon: Linkedin, label: "LinkedIn — Timilehin Hezekiah Bolarinwa", href: CONTACT.linkedin },
-  { icon: Instagram, label: "Instagram — Timilehin Hezekiah Bolarinwa", href: CONTACT.instagram },
-  { icon: Twitter, label: "Twitter/X — Timilehin Hezekiah Bolarinwa", href: CONTACT.twitter },
-  { icon: MessageCircle, label: `WhatsApp — ${CONTACT.phone}`, href: CONTACT.whatsapp },
+  { icon: Linkedin, label: "LinkedIn Timilehin Hezekiah Bolarinwa", href: CONTACT.linkedin },
+  { icon: Instagram, label: "Instagram Timilehin Hezekiah Bolarinwa", href: CONTACT.instagram },
+  { icon: Twitter, label: "Twitter and X Timilehin Hezekiah Bolarinwa", href: CONTACT.twitter },
+  { icon: MessageCircle, label: `WhatsApp ${CONTACT.phone}`, href: CONTACT.whatsapp },
 ];
 
 function Contact() {
@@ -1245,7 +1227,7 @@ function Contact() {
 
           <div className="mt-6 flex items-center justify-between gap-4">
             <span className="text-xs text-muted-foreground" role="status">
-              {status === "sent" && "✓ Thanks — your mail app should now be open."}
+              {status === "sent" && "✓ Thanks, your mail app should now be open."}
               {status === "error" && "Something went wrong. Try again."}
             </span>
             <button
