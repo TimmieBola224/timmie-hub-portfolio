@@ -24,12 +24,14 @@ import {
   Quote,
   Rocket,
   Send,
-  Sparkles,
   Sun,
   Twitter,
   Wallet,
   X,
 } from "lucide-react";
+import portraitAsset from "@/assets/bolarinwa-portrait.png.asset.json";
+
+const PORTRAIT_URL = portraitAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
