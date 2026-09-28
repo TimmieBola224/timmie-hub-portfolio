@@ -24,12 +24,14 @@ import {
   Quote,
   Rocket,
   Send,
-  Sparkles,
   Sun,
   Twitter,
   Wallet,
   X,
 } from "lucide-react";
+import portraitAsset from "@/assets/bolarinwa-portrait.png.asset.json";
+
+const PORTRAIT_URL = portraitAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -680,8 +682,15 @@ function Hero() {
           className="relative mx-auto w-full max-w-md"
         >
           <div className="glass relative rounded-3xl p-6 shadow-glow-lg">
-            <div className="mx-auto grid h-40 w-40 place-items-center rounded-full bg-gradient-brand text-5xl font-display font-bold text-primary-foreground shadow-glow">
-              BT
+            <div className="relative mx-auto h-56 w-56 sm:h-64 sm:w-64">
+              <div className="absolute inset-0 rounded-full border border-[rgba(212,175,55,0.45)]" />
+              <div className="absolute -inset-2 rounded-full border border-[rgba(212,175,55,0.15)]" />
+              <img
+                src={PORTRAIT_URL}
+                alt="Bolarinwa Timilehin Hezekiah"
+                className="h-full w-full rounded-full object-cover object-[center_18%]"
+                loading="eager"
+              />
             </div>
             <div className="mt-6 text-center">
               <div className="font-display text-xl font-semibold">Timmie Hub</div>
@@ -728,8 +737,13 @@ function About() {
           className="space-y-4"
         >
           <div className="glass relative overflow-hidden rounded-3xl p-2">
-            <div className="grid aspect-[4/5] w-full place-items-center rounded-2xl border border-glass-border bg-secondary">
-              <span className="font-display text-6xl font-bold text-gradient">BTH</span>
+            <div className="overflow-hidden rounded-2xl border border-glass-border">
+              <img
+                src={PORTRAIT_URL}
+                alt="Bolarinwa Timilehin Hezekiah portrait"
+                className="aspect-[4/5] w-full object-cover object-[center_15%]"
+                loading="lazy"
+              />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
