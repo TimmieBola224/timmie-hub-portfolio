@@ -1084,8 +1084,8 @@ function Experience() {
 function Education() {
   return (
     <Section id="education">
-      <SectionTitle eyebrow="06 Credentials" title="Education & Certifications" />
-      <div className="grid gap-4 md:grid-cols-3">
+      <SectionTitle eyebrow="06 Credentials" title="Education" />
+      <div className="mx-auto grid max-w-xl gap-4">
         {EDUCATION.map((e, i) => (
           <motion.div
             key={e.title}
