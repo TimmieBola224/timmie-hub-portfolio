@@ -30,6 +30,10 @@ import {
   X,
 } from "lucide-react";
 import portraitAsset from "@/assets/bolarinwa-portrait.png.asset.json";
+import computerCenterAsset from "@/assets/project-computer-center.jpg.asset.json";
+import doughnutAsset from "@/assets/project-doughnut-business.jpg.asset.json";
+import financeTalkAsset from "@/assets/project-online-finance-talk.jpg.asset.json";
+import coachingAsset from "@/assets/project-financial-coaching.jpg.asset.json";
 
 const PORTRAIT_URL = portraitAsset.url;
 
@@ -129,7 +133,16 @@ const SKILLS = [
 
 const PROJECT_CATEGORIES = ["All", "Web Design", "Business", "Public Speaking"] as const;
 
-const PROJECTS = [
+const PROJECTS: {
+  title: string;
+  category: string;
+  tagline: string;
+  description: string;
+  tags: string[];
+  demo?: string;
+  accent: string;
+  image?: string;
+}[] = [
   {
     title: "Timmie Hub Portfolio",
     category: "Web Design",
