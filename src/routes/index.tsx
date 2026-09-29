@@ -856,7 +856,17 @@ function Skills() {
 
 function Projects() {
   const [filter, setFilter] = useState<(typeof PROJECT_CATEGORIES)[number]>("All");
+  const [zoom, setZoom] = useState<string | null>(null);
   const list = PROJECTS.filter((p) => filter === "All" || p.category === filter);
+
+  useEffect(() => {
+    if (!zoom) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setZoom(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [zoom]);
 
   return (
     <Section id="projects">
