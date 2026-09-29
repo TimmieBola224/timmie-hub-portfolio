@@ -908,7 +908,21 @@ function Projects() {
             <div
               className={`aspect-[16/9] w-full overflow-hidden rounded-2xl bg-gradient-to-br ${p.accent} relative`}
             >
-              
+              {p.image && (
+                <button
+                  type="button"
+                  onClick={() => setZoom(p.image!)}
+                  aria-label={`View larger photo for ${p.title}`}
+                  className="block h-full w-full cursor-zoom-in"
+                >
+                  <img
+                    src={p.image}
+                    alt={`${p.title} photo`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </button>
+              )}
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                 <span className="font-mono text-xs uppercase tracking-widest text-primary-foreground/80">
                   {p.category}
