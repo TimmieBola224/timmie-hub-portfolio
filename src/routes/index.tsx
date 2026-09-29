@@ -3,7 +3,6 @@ import { motion, useScroll, useSpring, AnimatePresence } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUp,
-  Award,
   Briefcase,
   Building2,
   Calculator,
