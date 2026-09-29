@@ -30,6 +30,10 @@ import {
   X,
 } from "lucide-react";
 import portraitAsset from "@/assets/bolarinwa-portrait.png.asset.json";
+import computerCenterAsset from "@/assets/project-computer-center.jpg.asset.json";
+import doughnutAsset from "@/assets/project-doughnut-business.jpg.asset.json";
+import financeTalkAsset from "@/assets/project-online-finance-talk.jpg.asset.json";
+import coachingAsset from "@/assets/project-financial-coaching.jpg.asset.json";
 
 const PORTRAIT_URL = portraitAsset.url;
 
@@ -129,7 +133,16 @@ const SKILLS = [
 
 const PROJECT_CATEGORIES = ["All", "Web Design", "Business", "Public Speaking"] as const;
 
-const PROJECTS = [
+const PROJECTS: {
+  title: string;
+  category: string;
+  tagline: string;
+  description: string;
+  tags: string[];
+  demo?: string;
+  accent: string;
+  image?: string;
+}[] = [
   {
     title: "Timmie Hub Portfolio",
     category: "Web Design",
@@ -158,6 +171,7 @@ const PROJECTS = [
       "Running a successful doughnut business for over 2 years, managing daily operations, customer service, and sales.",
     tags: ["Operations", "Sales", "Customer Service"],
     accent: "from-[#f5c842] to-[#8c6f1f]",
+    image: doughnutAsset.url,
   },
   {
     title: "Telecom & Data Services",
@@ -176,6 +190,7 @@ const PROJECTS = [
       "Established and currently managing a computer center providing tech services to the local community.",
     tags: ["Tech Services", "Management"],
     accent: "from-[#e0bd52] to-[#b8952e]",
+    image: computerCenterAsset.url,
   },
   {
     title: "Online Finance Talk",
@@ -185,6 +200,7 @@ const PROJECTS = [
       "Hosted an online financial education session with colleagues, teaching practical money management and financial literacy.",
     tags: ["Speaking", "Financial Literacy"],
     accent: "from-[#f5c842] to-[#d4af37]",
+    image: financeTalkAsset.url,
   },
   {
     title: "One-on-One Financial Coaching",
@@ -194,6 +210,7 @@ const PROJECTS = [
       "Provided personal financial guidance and coaching to individuals, helping them make better money decisions.",
     tags: ["Coaching", "Advisory"],
     accent: "from-[#c9a233] to-[#f0d27a]",
+    image: coachingAsset.url,
   },
 ];
 
@@ -839,7 +856,17 @@ function Skills() {
 
 function Projects() {
   const [filter, setFilter] = useState<(typeof PROJECT_CATEGORIES)[number]>("All");
+  const [zoom, setZoom] = useState<string | null>(null);
   const list = PROJECTS.filter((p) => filter === "All" || p.category === filter);
+
+  useEffect(() => {
+    if (!zoom) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setZoom(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [zoom]);
 
   return (
     <Section id="projects">
@@ -881,7 +908,21 @@ function Projects() {
             <div
               className={`aspect-[16/9] w-full overflow-hidden rounded-2xl bg-gradient-to-br ${p.accent} relative`}
             >
-              
+              {p.image && (
+                <button
+                  type="button"
+                  onClick={() => setZoom(p.image!)}
+                  aria-label={`View larger photo for ${p.title}`}
+                  className="block h-full w-full cursor-zoom-in"
+                >
+                  <img
+                    src={p.image}
+                    alt={`${p.title} photo`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </button>
+              )}
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                 <span className="font-mono text-xs uppercase tracking-widest text-primary-foreground/80">
                   {p.category}
@@ -922,6 +963,42 @@ function Projects() {
           </motion.article>
         ))}
       </div>
+
+      <AnimatePresence>
+        {zoom && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Enlarged project photo"
+            onClick={() => setZoom(null)}
+            className="fixed inset-0 z-[100] grid place-items-center bg-black/85 p-4 backdrop-blur-sm"
+          >
+            <motion.img
+              key={zoom}
+              src={zoom}
+              alt="Enlarged project photo"
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[85vh] max-w-3xl rounded-2xl border border-[rgba(212,175,55,0.4)] object-contain shadow-glow-lg"
+            />
+            <button
+              type="button"
+              onClick={() => setZoom(null)}
+              aria-label="Close enlarged photo"
+              className="glass absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full text-foreground"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Section>
   );
 }
