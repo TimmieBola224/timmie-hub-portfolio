@@ -171,6 +171,7 @@ const PROJECTS: {
       "Running a successful doughnut business for over 2 years, managing daily operations, customer service, and sales.",
     tags: ["Operations", "Sales", "Customer Service"],
     accent: "from-[#f5c842] to-[#8c6f1f]",
+    image: doughnutAsset.url,
   },
   {
     title: "Telecom & Data Services",
@@ -189,6 +190,7 @@ const PROJECTS: {
       "Established and currently managing a computer center providing tech services to the local community.",
     tags: ["Tech Services", "Management"],
     accent: "from-[#e0bd52] to-[#b8952e]",
+    image: computerCenterAsset.url,
   },
   {
     title: "Online Finance Talk",
@@ -198,6 +200,7 @@ const PROJECTS: {
       "Hosted an online financial education session with colleagues, teaching practical money management and financial literacy.",
     tags: ["Speaking", "Financial Literacy"],
     accent: "from-[#f5c842] to-[#d4af37]",
+    image: financeTalkAsset.url,
   },
   {
     title: "One-on-One Financial Coaching",
@@ -207,6 +210,7 @@ const PROJECTS: {
       "Provided personal financial guidance and coaching to individuals, helping them make better money decisions.",
     tags: ["Coaching", "Advisory"],
     accent: "from-[#c9a233] to-[#f0d27a]",
+    image: coachingAsset.url,
   },
 ];
 
