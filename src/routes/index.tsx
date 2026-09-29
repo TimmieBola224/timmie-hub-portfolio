@@ -963,6 +963,42 @@ function Projects() {
           </motion.article>
         ))}
       </div>
+
+      <AnimatePresence>
+        {zoom && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Enlarged project photo"
+            onClick={() => setZoom(null)}
+            className="fixed inset-0 z-[100] grid place-items-center bg-black/85 p-4 backdrop-blur-sm"
+          >
+            <motion.img
+              key={zoom}
+              src={zoom}
+              alt="Enlarged project photo"
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-[85vh] max-w-3xl rounded-2xl border border-[rgba(212,175,55,0.4)] object-contain shadow-glow-lg"
+            />
+            <button
+              type="button"
+              onClick={() => setZoom(null)}
+              aria-label="Close enlarged photo"
+              className="glass absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full text-foreground"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Section>
   );
 }
