@@ -3,7 +3,6 @@ import { motion, useScroll, useSpring, AnimatePresence } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUp,
-  Award,
   Briefcase,
   Building2,
   Calculator,
@@ -283,20 +282,6 @@ const EDUCATION = [
     org: "Federal University Wukari, Taraba State",
     year: "2023 — Present (400 Level)",
     desc: "Studying Accounting with a focus on financial reporting, public sector accounting, and financial management. Active member and Financial Secretary of NUASA Federal University Wukari Chapter.",
-  },
-  {
-    icon: GraduationCap,
-    title: "Secondary School Certificate",
-    org: "Ondo Boys High School",
-    year: "Graduated 2023",
-    desc: "Completed secondary school education at one of Nigeria's reputable institutions.",
-  },
-  {
-    icon: Award,
-    title: "Public Speaking Certification",
-    org: "Global Speaker Academy, issued by Emmanuel Edoh",
-    year: "2025",
-    desc: "Completed a professional public speaking program, developing skills in presentation, communication, audience engagement, and impactful delivery.",
   },
 ];
 
@@ -1098,8 +1083,8 @@ function Experience() {
 function Education() {
   return (
     <Section id="education">
-      <SectionTitle eyebrow="06 Credentials" title="Education & Certifications" />
-      <div className="grid gap-4 md:grid-cols-3">
+      <SectionTitle eyebrow="06 Credentials" title="Education" />
+      <div className="mx-auto grid max-w-xl gap-4">
         {EDUCATION.map((e, i) => (
           <motion.div
             key={e.title}
